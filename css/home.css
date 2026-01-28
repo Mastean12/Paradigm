@@ -209,3 +209,7 @@ Paradigm Pet Professionals - Home Page Styles
     font-weight: 600;
     color: var(--primary-dark);
 }
+nav {
+  overflow-x: auto;
+  white-space: nowrap;
+}
