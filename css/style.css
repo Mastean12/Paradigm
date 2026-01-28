@@ -16,7 +16,7 @@ This is the main file that imports all other CSS files.
 @import url('resources.css');
 @import url('about.css');
 @import url('faq.css');
-@import url('responsive.css');
+
 /* 
 Note: Each HTML page can use a subset of these imports.
 For example, the home page only needs:

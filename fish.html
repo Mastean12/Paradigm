@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Comprehensive fish care guide covering freshwater and saltwater aquarium setup, maintenance, and health management.">
+    <meta name="description" content="Complete guide to freshwater and saltwater fish care, water testing, aquarium maintenance, and creating a healthy aquatic environment.">
     <title>Fish Care Guide | Paradigm Pet Professionals</title>
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
@@ -14,9 +13,97 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Fish-specific styles */
+        .fish-hero {
+            background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/fish-hero.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .water-testing-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left: 4px solid #03a9f4;
+        }
+        
+        .water-params {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin: var(--space-lg) 0;
+        }
+        
+        .param-card {
+            background: var(--white);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            border-top: 4px solid var(--primary-light);
+        }
+        
+        .param-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin: var(--space-xs) 0;
+        }
+        
+        .param-range {
+            color: var(--secondary-dark);
+            font-size: 0.9rem;
+        }
+        
+        .fish-type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xl);
+            margin: var(--space-xl) 0;
+        }
+        
+        .fish-type-card {
+            background: var(--white);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .fish-type-card.freshwater {
+            border-top: 4px solid #2196f3;
+        }
+        
+        .fish-type-card.saltwater {
+            border-top: 4px solid #ff9800;
+        }
+        
+        .testing-frequency {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: #fff3e0;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .testing-frequency i {
+            font-size: 2rem;
+            color: #ff9800;
+        }
+        
+        @media (max-width: 768px) {
+            .fish-type-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .water-params {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header & Navigation -->
     <header class="site-header">
         <div class="container">
             <div class="header-inner">
@@ -55,7 +142,7 @@
     <section class="page-hero fish-hero">
         <div class="container">
             <h1>Fish Care Guide</h1>
-            <p>Everything you need to know about keeping your aquatic friends healthy and happy</p>
+            <p>Freshwater and saltwater aquarium maintenance, water testing, and creating a healthy aquatic environment for your fish.</p>
         </div>
     </section>
 
@@ -64,127 +151,230 @@
         <div class="page-content">
             <!-- Introduction -->
             <section class="content-section">
-                <h2>Comprehensive Fish Care Guide</h2>
-                <p>Fish represent a broad category of animals in the aquatic world, making up nearly half of all known vertebrate species. Whether you're considering freshwater or saltwater fish, we're here to help you create a thriving aquatic environment.</p>
+                <h2>The Wonderful World of Aquarium Fish</h2>
+                <p>Fish represent a broad class of aquatic animals that can live in fresh or saltwater, depending on the species. Bringing fish into your home can be an exciting hobby, especially if you intend to breed them, and the presence of a fish tank in your home can induce feelings of peace and tranquility.</p>
                 <div class="content-image">
-                    <img src="assets/images/fish-intro.jpg" alt="Colorful aquarium fish swimming">
+                    <img src="assets/images/fish-intro.jpg" alt="Colorful tropical fish swimming in aquarium">
                 </div>
             </section>
 
-            <!-- Freshwater Fish Section -->
+            <!-- Water Testing Section -->
+            <section class="content-section">
+                <div class="water-testing-card">
+                    <h3><i class="fas fa-flask"></i> Weekly Water Testing</h3>
+                    <p>Whether you are bringing your fish home for the first time or maintaining your aquarium, it is important to test your water <strong>once per week</strong> to ensure it is free from toxins that can harm your fish.</p>
+                    
+                    <div class="testing-frequency">
+                        <i class="fas fa-calendar-check"></i>
+                        <div>
+                            <h4>Testing Schedule</h4>
+                            <p><strong>Weekly:</strong> pH, Ammonia, Nitrites, Nitrates<br>
+                            <strong>Monthly:</strong> Complete water test including hardness and alkalinity<br>
+                            <strong>After Issues:</strong> Test immediately if fish show signs of stress</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Freshwater Fish -->
             <section class="content-section">
                 <h2>Freshwater Fish Care</h2>
-                <p>Freshwater fish are the most popular choice for home aquariums, with approximately 850 species available. They're generally easier to care for than saltwater species.</p>
+                <p>There are several freshwater fish to choose from when setting up your aquarium, but it is best to consult with a "Pexpert" to ensure your fish will get along! No matter the species, ensure your fish are suited for a freshwater environment by investing in a water testing kit.</p>
                 
-                <h3>Tank Setup & Maintenance</h3>
-                <ul>
-                    <li><strong>Tank Size:</strong> Minimum 20 gallons for most community fish</li>
-                    <li><strong>Filtration:</strong> Use a filter rated for 4-5 times your tank volume per hour</li>
-                    <li><strong>Heating:</strong> Most tropical fish require 75-80°F (24-27°C)</li>
-                    <li><strong>Water Changes:</strong> 25% weekly or 50% monthly</li>
-                    <li><strong>Cycling:</strong> Always cycle new tanks for 4-6 weeks before adding fish</li>
-                </ul>
-                
-                <div class="content-image">
-                    <img src="assets/images/freshwater-fish.jpg" alt="Freshwater aquarium setup">
-                    <p class="image-caption">A well-maintained freshwater community tank</p>
+                <div class="fish-type-grid">
+                    <div class="fish-type-card freshwater">
+                        <h3><i class="fas fa-tint"></i> Freshwater Water Parameters</h3>
+                        <p>Follow these general water chemistry guidelines to ensure your fish will adapt well to your aquarium and avoid ingesting toxins that can harm or kill your fish:</p>
+                        
+                        <div class="water-params">
+                            <div class="param-card">
+                                <h4>pH Level</h4>
+                                <div class="param-value">6.8 - 7.6</div>
+                                <div class="param-range">7.0 is neutral</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>Ammonia</h4>
+                                <div class="param-value">0 ppm</div>
+                                <div class="param-range">Any level above zero is harmful</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>Nitrates</h4>
+                                <div class="param-value">5-10 ppm</div>
+                                <div class="param-range">Optimal range</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>Nitrites</h4>
+                                <div class="param-value">&lt;0.5 ppm</div>
+                                <div class="param-range">Maximum safe level</div>
+                            </div>
+                        </div>
+                        
+                        <h4>Popular Freshwater Species:</h4>
+                        <ul>
+                            <li>Betta Fish (Siamese Fighting Fish)</li>
+                            <li>Goldfish and Koi</li>
+                            <li>Guppies, Mollies, Platies</li>
+                            <li>Angelfish and Discus</li>
+                            <li>African Cichlids</li>
+                            <li>Tetra Species</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <!-- Saltwater Fish Section -->
+            <!-- Saltwater Fish -->
             <section class="content-section">
                 <h2>Saltwater Fish Care</h2>
-                <p>Saltwater (marine) aquariums offer incredible biodiversity but require more precise water parameters and maintenance.</p>
+                <p>Saltwater fish also offer several options when it comes to choosing among species for your aquarium. As with freshwater fish, consult with a "Pexpert" to ensure your fish will get along and are suited for a saltwater environment.</p>
                 
-                <h3>Key Considerations</h3>
+                <div class="fish-type-grid">
+                    <div class="fish-type-card saltwater">
+                        <h3><i class="fas fa-water"></i> Saltwater Water Parameters</h3>
+                        <p>Following these general guidelines will help you avoid dangerous water conditions and ensure the appropriate salinity level for your fishies:</p>
+                        
+                        <div class="water-params">
+                            <div class="param-card">
+                                <h4>Salinity</h4>
+                                <div class="param-value">1.020-1.028 sg</div>
+                                <div class="param-range">Specific gravity</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>pH Level</h4>
+                                <div class="param-value">7.6 - 8.4</div>
+                                <div class="param-range">7.0 is neutral</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>Ammonia</h4>
+                                <div class="param-value">0 ppm</div>
+                                <div class="param-range">&gt;0.1 ppm requires attention</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>Nitrates</h4>
+                                <div class="param-value">10-40 ppm</div>
+                                <div class="param-range">Reef: &lt;10 ppm, Fish Only: &lt;40 ppm</div>
+                            </div>
+                            <div class="param-card">
+                                <h4>Nitrites</h4>
+                                <div class="param-value">&lt;0.2 ppm</div>
+                                <div class="param-range">Maximum safe level</div>
+                            </div>
+                        </div>
+                        
+                        <h4>Popular Saltwater Species:</h4>
+                        <ul>
+                            <li>Clownfish (Nemo)</li>
+                            <li>Tang Species (Dory)</li>
+                            <li>Damselfish</li>
+                            <li>Wrasses and Gobies</li>
+                            <li>Angelfish and Butterflyfish</li>
+                            <li>Marine Invertebrates</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aquarium Setup -->
+            <section class="content-section">
+                <h2>Aquarium Setup & Maintenance</h2>
+                
+                <div class="age-stage">
+                    <h3>Setting Up Your First Aquarium</h3>
+                    <p><strong>Step 1:</strong> Choose aquarium size and location (away from direct sunlight and drafts)<br>
+                    <strong>Step 2:</strong> Install substrate, decorations, and equipment (filter, heater, lighting)<br>
+                    <strong>Step 3:</strong> Add dechlorinated water and start the nitrogen cycle (4-6 weeks)<br>
+                    <strong>Step 4:</strong> Test water parameters until stable<br>
+                    <strong>Step 5:</strong> Add fish gradually (start with hardy species)</p>
+                </div>
+                
+                <div class="age-stage">
+                    <h3>Weekly Maintenance Routine</h3>
+                    <ul>
+                        <li><strong>Water Testing:</strong> Check pH, ammonia, nitrites, nitrates</li>
+                        <li><strong>Partial Water Change:</strong> 10-25% of tank volume</li>
+                        <li><strong>Glass Cleaning:</strong> Remove algae from viewing panes</li>
+                        <li><strong>Filter Maintenance:</strong> Rinse media in tank water (not tap water)</li>
+                        <li><strong>Equipment Check:</strong> Ensure heater, filter, lights working properly</li>
+                        <li><strong>Water Conditioning:</strong> Add dechlorinator to new water</li>
+                    </ul>
+                </div>
+                
+                <div class="age-stage">
+                    <h3>Feeding Guidelines</h3>
+                    <p><strong>Frequency:</strong> Most fish should be fed 1-2 times daily<br>
+                    <strong>Amount:</strong> Only what they can consume in 2-3 minutes<br>
+                    <strong>Variety:</strong> Offer different foods (flakes, pellets, frozen, live)<br>
+                    <strong>Fasting:</strong> One fasting day per week helps digestive health</p>
+                </div>
+            </section>
+
+            <!-- Water Treatment Resources -->
+            <section class="content-section">
+                <h3>Making Tap Water Safe for Fish</h3>
+                <p>For more information on making your tap water safe for your fish, please visit:</p>
                 <ul>
-                    <li><strong>Tank Size:</strong> Minimum 30 gallons, larger is better for stability</li>
-                    <li><strong>Salinity:</strong> Maintain 1.023-1.025 specific gravity</li>
-                    <li><strong>pH Level:</strong> Keep between 8.1-8.4</li>
-                    <li><strong>Protein Skimmer:</strong> Essential for waste removal</li>
-                    <li><strong>Live Rock:</strong> Provides biological filtration and hiding places</li>
+                    <li><a href="http://www.theaquariumwiki.org/wiki/How_to_make_tap_water_safe_for_fish" target="_blank">The Aquarium Wiki: Making Tap Water Safe</a></li>
+                    <li><a href="http://fishbase.org/home.htm" target="_blank">FishBase: Comprehensive Fish Database</a></li>
                 </ul>
                 
                 <div class="important-note">
-                    <p><strong>Important Note:</strong> Saltwater aquariums require a significant investment in time, equipment, and knowledge. We recommend starting with freshwater if you're new to fish keeping.</p>
-                </div>
-            </section>
-
-            <!-- Common Issues Section -->
-            <section class="content-section">
-                <h2>Common Fish Health Issues</h2>
-                <div class="warning-signs">
-                    <div class="warning-sign">
-                        <div class="sign-icon"><i class="fas fa-tint"></i></div>
-                        <div class="sign-content">
-                            <h4>Ich (White Spot Disease)</h4>
-                            <p>White spots on body/fins, flashing against objects. Treat with raised temperature and medication.</p>
-                        </div>
-                    </div>
-                    <div class="warning-sign">
-                        <div class="sign-icon"><i class="fas fa-lungs"></i></div>
-                        <div class="sign-content">
-                            <h4>Ammonia Poisoning</h4>
-                            <p>Red gills, gasping at surface, lethargy. Test water immediately and perform water changes.</p>
-                        </div>
-                    </div>
-                    <div class="warning-sign">
-                        <div class="sign-icon"><i class="fas fa-utensils"></i></div>
-                        <div class="sign-content">
-                            <h4>Fin Rot</h4>
-                            <p>Frayed or disintegrating fins. Improve water quality and consider antibacterial treatment.</p>
-                        </div>
-                    </div>
+                    <p><strong>Important:</strong> Always use a water conditioner to remove chlorine and chloramines from tap water. These chemicals are deadly to fish and beneficial bacteria in your filter.</p>
                 </div>
             </section>
 
             <!-- Consultation CTA -->
             <section class="content-section cta-card">
-                <h3>Need Help With Your Aquarium?</h3>
-                <p>Our aquatic specialists can help you design, set up, and maintain the perfect aquarium for your home or office.</p>
-                <a href="consultation.html" class="btn btn-primary">Schedule Aquarium Consultation</a>
+                <h3>Need Help Setting Up or Maintaining Your Aquarium?</h3>
+                <p>Our Pexperts can help you choose compatible fish species, troubleshoot water quality issues, and create a maintenance schedule tailored to your specific aquarium setup.</p>
+                <a href="consultation.html" class="btn btn-primary">Schedule a Fish Consultation</a>
             </section>
         </div>
 
         <!-- Sidebar -->
         <aside class="page-sidebar">
             <div class="sidebar-widget">
-                <h4>Quick Tips</h4>
+                <h4>Weekly Aquarium Checklist</h4>
                 <ul class="tip-list">
-                    <li>Always acclimate fish slowly (drip method recommended)</li>
-                    <li>Test water parameters weekly</li>
-                    <li>Don't overfeed - feed only what fish consume in 2 minutes</li>
-                    <li>Quarantine new fish for 2-4 weeks</li>
-                    <li>Research fish compatibility before adding to community tanks</li>
+                    <li>Test water parameters</li>
+                    <li>10-25% water change</li>
+                    <li>Clean aquarium glass</li>
+                    <li>Check equipment function</li>
+                    <li>Observe fish behavior</li>
+                    <li>Trim live plants (if any)</li>
                 </ul>
             </div>
+            
+            <div class="sidebar-widget">
+                <h4>Common Water Problems</h4>
+                <ul class="tip-list">
+                    <li>Cloudy water (bacterial bloom)</li>
+                    <li>Green water (algae bloom)</li>
+                    <li>High ammonia (new tank or overfeeding)</li>
+                    <li>Low pH (acidic water)</li>
+                    <li>High nitrates (infrequent water changes)</li>
+                </ul>
+            </div>
+            
             <div class="sidebar-widget">
                 <h4>Essential Equipment</h4>
                 <ul class="tip-list">
-                    <li>Appropriately sized aquarium</li>
-                    <li>Quality filter system</li>
-                    <li>Aquarium heater (for tropical fish)</li>
-                    <li>Thermometer</li>
-                    <li>Water test kit</li>
-                    <li>Aquarium lighting</li>
-                    <li>Net, gravel vacuum, algae scraper</li>
-                    <li>Water conditioner</li>
+                    <li>Quality filter</li>
+                    <li>Appropriate heater</li>
+                    <li>Water testing kit</li>
+                    <li>Aquarium thermometer</li>
+                    <li>Gravel vacuum</li>
+                    <li>Algae scraper</li>
                 </ul>
             </div>
+            
             <div class="sidebar-widget">
-                <h4>Beginner-Friendly Species</h4>
-                <div class="sidebar-image">
-                    <img src="assets/images/beginner-fish.jpg" alt="Beginner friendly fish species">
-                </div>
-                <p><strong>Freshwater:</strong> Guppies, Platies, Tetras, Corydoras, Betta (solo)</p>
-                <p><strong>Saltwater:</strong> Clownfish, Damselfish, Blennies, Gobies</p>
+                <img src="assets/images/fish-sidebar.jpg" alt="Colorful community aquarium with various fish species" class="sidebar-image">
+                <p class="image-caption">A well-maintained aquarium provides a beautiful, tranquil environment for both fish and observers.</p>
             </div>
-            <div class="sidebar-widget">
-                <div class="download-card">
-                    <h4>Download Our Fish Care Guide</h4>
-                    <p>Get our comprehensive aquarium setup and maintenance checklist</p>
-                    <a href="#" class="btn btn-secondary btn-small"><i class="fas fa-download"></i> Download PDF</a>
-                </div>
+            
+            <div class="sidebar-widget download-card">
+                <h4>Download Water Testing Log</h4>
+                <p>Track your aquarium water parameters with our printable weekly testing log.</p>
+                <a href="#" class="btn btn-secondary btn-small"><i class="fas fa-download"></i> Download PDF</a>
             </div>
         </aside>
     </main>
@@ -195,7 +385,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <img src="assets/logo.png" alt="Paradigm Pet Professionals Logo" width="180">
+                        <img src="assets/logo-small.png" alt="Paradigm Pet Professionals Logo" width="180">
                     </div>
                     <p class="footer-slogan">Evidence-based pet care advice for every pet lover.</p>
                 </div>
@@ -227,7 +417,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Paradigm Pet Professionals. All rights reserved.</p>
+                <p>&copy; <span class="current-year">2026</span> Paradigm Pet Professionals. All rights reserved.</p>
             </div>
         </div>
     </footer>

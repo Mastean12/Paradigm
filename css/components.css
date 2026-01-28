@@ -162,6 +162,13 @@ Paradigm Pet Professionals - Component Styles
     transform: translateY(0);
 }
 
+/* ADD THIS - Show dropdown when 'open' class is added by JavaScript */
+.dropdown.open .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 .dropdown-menu li {
     list-style: none;
 }

@@ -1,170 +1,184 @@
-
 /**
  * Paradigm Pet Professionals - Main JavaScript File
- * Author: [Your Name]
+ * Author: Paradigm Pet Professionals
  * Date: January 28, 2026
  * 
  * This file handles:
- * 1. Mobile navigation toggle
+ * 1. Mobile navigation toggle and responsive behavior
  * 2. Form validation
- * 3. Interactive elements
+ * 3. Interactive elements with mobile optimizations
  * 4. Accessibility enhancements
- * 5. Pet care guides navigation (Cats, Dogs, Birds, Fish, Small Animals)
+ * 5. Mobile-first responsive features
+ * 6. Prevention of horizontal overflow on mobile
  */
 
 // ===== DOCUMENT READY =====
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Paradigm Pet Professionals website loaded');
+    console.log('Paradigm Pet Professionals website loaded - Mobile Optimized');
     
     // Initialize all functionality
-    initMobileMenu();
+    initMobileNavigation();
     initDropdowns();
     initFormValidation();
     initSmoothScrolling();
     initAccessibilityFeatures();
     initDynamicContent();
     initPetPagesFeatures();
+    initResponsiveUtilities();
+    
+    // Prevent horizontal overflow
+    preventHorizontalOverflow();
+    
+    // Handle orientation changes
+    window.addEventListener('orientationchange', function() {
+        setTimeout(function() {
+            preventHorizontalOverflow();
+            adjustMobileLayout();
+        }, 100);
+    });
+    
+    // Run initial mobile adjustments
+    setTimeout(adjustMobileLayout, 100);
 });
 
-// ===== MOBILE NAVIGATION =====
-function initMobileMenu() {
+// ===== MOBILE NAVIGATION - FIXED =====
+function initMobileNavigation() {
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
     const primaryNav = document.querySelector('.primary-nav');
-    const mainNav = document.querySelector('.main-nav .nav-menu');
+    const body = document.body;
     
-    // If no mobile toggle but we have a main nav, create one for mobile
-    if (!mobileToggle && mainNav && window.innerWidth <= 768) {
-        createMobileMenuToggle(mainNav);
+    if (!mobileToggle || !primaryNav) {
+        console.warn('Mobile navigation elements not found');
         return;
     }
     
-    if (!mobileToggle || !primaryNav) return;
-    
-    // Toggle mobile menu
-    mobileToggle.addEventListener('click', function() {
-        primaryNav.classList.toggle('active');
-        mobileToggle.setAttribute('aria-expanded', 
-            primaryNav.classList.contains('active') ? 'true' : 'false'
-        );
+    // Function to close mobile menu
+    const closeMobileMenu = function() {
+        primaryNav.classList.remove('active');
+        body.classList.remove('nav-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileToggle.classList.remove('active');
         
-        // Update icon
         const icon = mobileToggle.querySelector('i');
         if (icon) {
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+        
+        // Enable body scrolling
+        body.style.overflow = '';
+        body.style.position = '';
+    };
+    
+    // Function to open mobile menu
+    const openMobileMenu = function() {
+        primaryNav.classList.add('active');
+        body.classList.add('nav-open');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        mobileToggle.classList.add('active');
+        
+        const icon = mobileToggle.querySelector('i');
+        if (icon) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        }
+        
+        // Prevent body scrolling when menu is open
+        body.style.overflow = 'hidden';
+        body.style.position = 'fixed';
+        body.style.width = '100%';
+    };
+    
+    // Toggle mobile menu
+    mobileToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        if (primaryNav.classList.contains('active')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
         }
     });
     
     // Close menu when clicking outside
     document.addEventListener('click', function(event) {
-        if (!primaryNav.contains(event.target) && 
-            !mobileToggle.contains(event.target) && 
-            primaryNav.classList.contains('active')) {
-            primaryNav.classList.remove('active');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            
-            // Reset icon
-            const icon = mobileToggle.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
+        if (primaryNav.classList.contains('active') &&
+            !primaryNav.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+            closeMobileMenu();
         }
     });
     
     // Close menu on escape key
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape' && primaryNav.classList.contains('active')) {
-            primaryNav.classList.remove('active');
-            mobileToggle.setAttribute('aria-expanded', 'false');
-            
-            // Reset icon
-            const icon = mobileToggle.querySelector('i');
-            if (icon) {
-                icon.classList.add('fa-bars');
-                icon.classList.remove('fa-times');
-            }
-            
-            // Return focus to toggle button
+            closeMobileMenu();
             mobileToggle.focus();
         }
     });
-}
-
-// Create mobile menu toggle if it doesn't exist
-function createMobileMenuToggle(navElement) {
-    const mobileToggle = document.createElement('button');
-    mobileToggle.className = 'mobile-menu-toggle';
-    mobileToggle.setAttribute('aria-label', 'Toggle navigation menu');
-    mobileToggle.setAttribute('aria-expanded', 'false');
-    mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
     
-    const navContainer = navElement.parentElement;
-    navContainer.insertBefore(mobileToggle, navElement);
-    
-    // Add mobile class to nav
-    navElement.classList.add('primary-nav');
-    
-    // Reinitialize mobile menu
-    initMobileMenu();
-}
-
-// ===== DROPDOWN MENUS =====
-function initDropdowns() {
-    // Find all dropdown toggles in the navigation
-    const dropdownToggles = document.querySelectorAll('.dropdown > a, .nav-menu .dropdown > a');
-    
-    // Also look for any element with dropdown class
-    const dropdownParents = document.querySelectorAll('.dropdown, .nav-menu li:has(ul)');
-    
-    dropdownParents.forEach(parent => {
-        const toggle = parent.querySelector('a');
-        if (!toggle) return;
-        
-        // Handle hover on desktop
-        parent.addEventListener('mouseenter', function() {
-            if (window.innerWidth > 768) {
-                this.classList.add('open');
-            }
-        });
-        
-        parent.addEventListener('mouseleave', function() {
-            if (window.innerWidth > 768) {
-                this.classList.remove('open');
-            }
-        });
-        
-        // Handle click on mobile
-        toggle.addEventListener('click', function(e) {
+    // Close menu when clicking a link (for mobile)
+    primaryNav.addEventListener('click', function(event) {
+        if (event.target.tagName === 'A' || event.target.closest('a')) {
             if (window.innerWidth <= 768) {
+                setTimeout(closeMobileMenu, 300);
+            }
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', debounce(function() {
+        if (window.innerWidth > 768 && primaryNav.classList.contains('active')) {
+            closeMobileMenu();
+        }
+    }, 250));
+}
+
+// ===== DROPDOWN MENUS - FIXED =====
+function initDropdowns() {
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        const dropdown = toggle.closest('.dropdown');
+        if (!dropdown) return;
+        
+        // Add click handler for all devices
+        toggle.addEventListener('click', function(e) {
+            // On mobile/tablet, toggle dropdown
+            if (window.innerWidth <= 1024) {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Toggle this dropdown
-                parent.classList.toggle('open');
+                const isOpen = dropdown.classList.contains('open');
                 
-                // Close other dropdowns in the same menu
-                const allDropdowns = document.querySelectorAll('.dropdown.open, .nav-menu li.open');
-                allDropdowns.forEach(otherDropdown => {
-                    if (otherDropdown !== parent && 
-                        otherDropdown.closest('.nav-menu') === parent.closest('.nav-menu')) {
-                        otherDropdown.classList.remove('open');
+                // Close all other dropdowns
+                document.querySelectorAll('.dropdown.open').forEach(other => {
+                    if (other !== dropdown) {
+                        other.classList.remove('open');
                     }
                 });
+                
+                // Toggle current dropdown
+                if (isOpen) {
+                    dropdown.classList.remove('open');
+                } else {
+                    dropdown.classList.add('open');
+                }
             }
         });
+        
+        // Initialize hover behavior for desktop
+        initDesktopDropdownHover(dropdown);
     });
     
-    // Close dropdowns when clicking outside
+    // Close dropdowns when clicking outside on mobile
     document.addEventListener('click', function(event) {
-        if (window.innerWidth <= 768) {
-            // Check if click is inside any dropdown
-            const clickedInsideDropdown = event.target.closest('.dropdown') || 
-                                         event.target.closest('.nav-menu li:has(ul)');
-            
-            if (!clickedInsideDropdown) {
-                // Close all dropdowns
-                document.querySelectorAll('.dropdown.open, .nav-menu li.open').forEach(dropdown => {
+        const clickedDropdown = event.target.closest('.dropdown');
+        
+        if (window.innerWidth <= 1024) {
+            if (!clickedDropdown) {
+                document.querySelectorAll('.dropdown.open').forEach(dropdown => {
                     dropdown.classList.remove('open');
                 });
             }
@@ -173,17 +187,198 @@ function initDropdowns() {
     
     // Close dropdowns on escape key
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && window.innerWidth <= 768) {
-            document.querySelectorAll('.dropdown.open, .nav-menu li.open').forEach(dropdown => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.dropdown.open').forEach(dropdown => {
                 dropdown.classList.remove('open');
             });
         }
     });
 }
 
+// Initialize desktop hover behavior
+function initDesktopDropdownHover(dropdown) {
+    if (window.innerWidth > 1024) {
+        dropdown.addEventListener('mouseenter', function() {
+            this.classList.add('open');
+        });
+        
+        dropdown.addEventListener('mouseleave', function() {
+            this.classList.remove('open');
+        });
+    }
+}
+
+// ===== RESPONSIVE UTILITIES =====
+function initResponsiveUtilities() {
+    // Add responsive classes to body
+    function updateResponsiveClasses() {
+        const width = window.innerWidth;
+        const body = document.body;
+        
+        // Remove all responsive classes
+        body.classList.remove('is-mobile', 'is-tablet', 'is-desktop');
+        
+        // Add appropriate class
+        if (width <= 768) {
+            body.classList.add('is-mobile');
+        } else if (width <= 1024) {
+            body.classList.add('is-tablet');
+        } else {
+            body.classList.add('is-desktop');
+        }
+        
+        // Reinitialize dropdown hover behavior on resize
+        if (width > 1024) {
+            document.querySelectorAll('.dropdown').forEach(initDesktopDropdownHover);
+        }
+    }
+    
+    // Initial update
+    updateResponsiveClasses();
+    
+    // Update on resize
+    window.addEventListener('resize', debounce(updateResponsiveClasses, 250));
+    
+    // Initialize touch device detection
+    detectTouchDevice();
+}
+
+// Detect touch device
+function detectTouchDevice() {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.body.classList.add('touch-device');
+        
+        // Add touch-specific optimizations
+        const tapTargets = document.querySelectorAll('a, button, [role="button"], input[type="submit"], input[type="button"]');
+        tapTargets.forEach(target => {
+            target.style.minHeight = '44px';
+            target.style.minWidth = '44px';
+        });
+    } else {
+        document.body.classList.add('no-touch-device');
+    }
+}
+
+// ===== PREVENT HORIZONTAL OVERFLOW =====
+function preventHorizontalOverflow() {
+    // Ensure body doesn't overflow horizontally
+    document.body.style.overflowX = 'hidden';
+    document.body.style.width = '100%';
+    document.body.style.maxWidth = '100vw';
+    
+    // Fix for iOS Safari 100vh issue
+    function setVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        
+        // Set min-height for mobile viewport
+        if (window.innerWidth <= 768) {
+            document.documentElement.style.minHeight = 'calc(var(--vh, 1vh) * 100)';
+        }
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    
+    // Fix images and tables that might cause overflow
+    const potentialOverflowElements = document.querySelectorAll('img, table, iframe, video');
+    potentialOverflowElements.forEach(element => {
+        element.style.maxWidth = '100%';
+        element.style.height = 'auto';
+    });
+    
+    // Handle tables specifically
+    const tables = document.querySelectorAll('table:not(.no-responsive)');
+    tables.forEach(table => {
+        if (!table.closest('.table-responsive')) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive';
+            wrapper.style.overflowX = 'auto';
+            wrapper.style.webkitOverflowScrolling = 'touch';
+            wrapper.style.width = '100%';
+            wrapper.style.margin = '1rem 0';
+            wrapper.style.border = '1px solid #eee';
+            wrapper.style.borderRadius = '4px';
+            
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    });
+}
+
+// ===== ADJUST MOBILE LAYOUT =====
+function adjustMobileLayout() {
+    const isMobile = window.innerWidth <= 768;
+    
+    // Stack page container on mobile
+    const pageContainers = document.querySelectorAll('.page-container');
+    pageContainers.forEach(container => {
+        if (isMobile) {
+            container.style.display = 'flex';
+            container.style.flexDirection = 'column';
+            container.style.gap = '20px';
+        } else {
+            container.style.display = 'grid';
+            container.style.gridTemplateColumns = '2fr 1fr';
+            container.style.gap = '40px';
+        }
+    });
+    
+    // Adjust sidebar on mobile
+    const sidebars = document.querySelectorAll('.page-sidebar');
+    sidebars.forEach(sidebar => {
+        if (isMobile) {
+            sidebar.style.order = '2';
+            sidebar.style.marginTop = '20px';
+            sidebar.style.maxHeight = 'none';
+        } else {
+            sidebar.style.order = '';
+            sidebar.style.marginTop = '';
+            sidebar.style.position = 'sticky';
+            sidebar.style.top = '100px';
+            sidebar.style.maxHeight = 'calc(100vh - 120px)';
+            sidebar.style.overflowY = 'auto';
+        }
+    });
+    
+    // Adjust main content on mobile
+    const mainContents = document.querySelectorAll('.page-content');
+    mainContents.forEach(content => {
+        if (isMobile) {
+            content.style.order = '1';
+        } else {
+            content.style.order = '';
+        }
+    });
+    
+    // Adjust font sizes for better mobile readability
+    if (isMobile) {
+        document.documentElement.style.fontSize = '15px';
+        
+        // Adjust heading sizes
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        headings.forEach(heading => {
+            const currentSize = parseFloat(window.getComputedStyle(heading).fontSize);
+            if (currentSize > 24) {
+                heading.style.fontSize = Math.min(currentSize, 28) + 'px';
+            }
+        });
+        
+        // Adjust button sizes
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            if (!button.classList.contains('btn-small')) {
+                button.style.padding = '12px 20px';
+                button.style.fontSize = '16px';
+            }
+        });
+    } else {
+        document.documentElement.style.fontSize = '';
+    }
+}
+
 // ===== PET PAGES SPECIFIC FEATURES =====
 function initPetPagesFeatures() {
-    // Only run on pet pages
     const isPetPage = window.location.pathname.includes('cats.html') ||
                      window.location.pathname.includes('dogs.html') ||
                      window.location.pathname.includes('birds.html') ||
@@ -192,280 +387,117 @@ function initPetPagesFeatures() {
     
     if (!isPetPage) return;
     
-    console.log('Initializing pet page features for:', window.location.pathname);
-    
-    // 1. Image lazy loading for pet pages
-    initPetPageLazyLoading();
-    
-    // 2. Sidebar toggle for mobile
-    initMobileSidebar();
-    
-    // 3. Tabbed content for comparison tables
-    initComparisonTables();
-    
-    // 4. Expandable content sections
-    initExpandableSections();
-    
-    // 5. Print/download functionality
-    initPrintDownload();
+    // Initialize mobile-optimized pet page features
+    initMobileOptimizedImages();
+    initMobileSidebarToggle();
+    initResponsiveTables();
+    initMobileFriendlyContent();
 }
 
-// Lazy load images on pet pages
-function initPetPageLazyLoading() {
-    const petImages = document.querySelectorAll('.pet-intro-image img, .content-image img, .sidebar-image img');
+// Mobile optimized images
+function initMobileOptimizedImages() {
+    const images = document.querySelectorAll('.content-image img, .sidebar-image');
     
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    
-                    // Load image if it has data-src
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                        delete img.dataset.src;
-                    }
-                    
-                    // Add loaded class for animation
-                    img.classList.add('loaded');
-                    
-                    imageObserver.unobserve(img);
-                }
-            });
-        }, {
-            rootMargin: '50px 0px', // Start loading 50px before image enters viewport
-            threshold: 0.1
-        });
-        
-        petImages.forEach(img => {
-            // Add loading animation
-            img.classList.add('lazy-load');
-            imageObserver.observe(img);
-        });
-    }
-}
-
-// Mobile sidebar toggle
-function initMobileSidebar() {
-    if (window.innerWidth <= 768) {
-        const sidebar = document.querySelector('.page-sidebar');
-        const mainContent = document.querySelector('.page-content');
-        
-        if (!sidebar || !mainContent) return;
-        
-        // Create toggle button
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'sidebar-toggle';
-        toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i> View Sidebar';
-        toggleBtn.setAttribute('aria-label', 'Toggle sidebar');
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        
-        // Insert after main content
-        mainContent.parentNode.insertBefore(toggleBtn, sidebar);
-        
-        // Toggle sidebar
-        toggleBtn.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            sidebar.classList.toggle('mobile-open');
-            
-            // Update icon and text
-            const icon = this.querySelector('i');
-            if (icon) {
-                icon.classList.toggle('fa-chevron-right');
-                icon.classList.toggle('fa-chevron-left');
-            }
-            this.innerHTML = isExpanded ? 
-                '<i class="fas fa-chevron-right"></i> View Sidebar' : 
-                '<i class="fas fa-chevron-left"></i> Hide Sidebar';
-        });
-        
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            if (window.innerWidth <= 768 && 
-                !sidebar.contains(event.target) && 
-                !toggleBtn.contains(event.target) && 
-                sidebar.classList.contains('mobile-open')) {
-                sidebar.classList.remove('mobile-open');
-                toggleBtn.setAttribute('aria-expanded', 'false');
-                toggleBtn.innerHTML = '<i class="fas fa-chevron-right"></i> View Sidebar';
-            }
-        });
-    }
-}
-
-// Make comparison tables responsive
-function initComparisonTables() {
-    const comparisonTables = document.querySelectorAll('.comparison-table');
-    
-    comparisonTables.forEach(table => {
+    images.forEach(img => {
+        // Ensure images don't overflow on mobile
         if (window.innerWidth <= 768) {
-            // On mobile, make tables horizontally scrollable
-            const wrapper = document.createElement('div');
-            wrapper.className = 'table-responsive';
-            wrapper.style.overflowX = 'auto';
-            wrapper.style.webkitOverflowScrolling = 'touch';
-            
-            table.parentNode.insertBefore(wrapper, table);
-            wrapper.appendChild(table);
-            
-            // Add hint for scrolling
-            const scrollHint = document.createElement('div');
-            scrollHint.className = 'scroll-hint';
-            scrollHint.innerHTML = '<i class="fas fa-arrow-right"></i> Scroll horizontally to view all columns';
-            scrollHint.style.cssText = 'text-align: center; padding: 8px; color: var(--secondary-dark); font-size: 0.9rem;';
-            
-            wrapper.parentNode.insertBefore(scrollHint, wrapper.nextSibling);
+            img.style.maxHeight = '250px';
+            img.style.objectFit = 'cover';
         }
-    });
-    
-    // Recheck on resize
-    window.addEventListener('resize', debounce(function() {
-        const tables = document.querySelectorAll('.comparison-table');
-        tables.forEach(table => {
-            const wrapper = table.parentElement;
-            if (window.innerWidth <= 768 && wrapper.className !== 'table-responsive') {
-                // Create wrapper for mobile
-                const newWrapper = document.createElement('div');
-                newWrapper.className = 'table-responsive';
-                newWrapper.style.overflowX = 'auto';
-                newWrapper.style.webkitOverflowScrolling = 'touch';
-                
-                table.parentNode.insertBefore(newWrapper, table);
-                newWrapper.appendChild(table);
-            } else if (window.innerWidth > 768 && wrapper.className === 'table-responsive') {
-                // Remove wrapper on desktop
-                wrapper.parentNode.insertBefore(table, wrapper);
-                wrapper.remove();
-            }
-        });
-    }, 250));
-}
-
-// Expandable sections for detailed content
-function initExpandableSections() {
-    // Create expandable sections for long content
-    const longSections = document.querySelectorAll('.content-section');
-    
-    longSections.forEach((section, index) => {
-        const content = section.querySelector('p, .info-card, ul');
-        if (!content || section.textContent.length < 500) return;
         
-        // Check if already has toggle
-        if (section.querySelector('.expand-toggle')) return;
-        
-        // Create toggle button
-        const toggleBtn = document.createElement('button');
-        toggleBtn.className = 'expand-toggle';
-        toggleBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
-        toggleBtn.setAttribute('aria-expanded', 'false');
-        toggleBtn.setAttribute('aria-controls', `section-${index}-content`);
-        
-        // Wrap content
-        const contentWrapper = document.createElement('div');
-        contentWrapper.id = `section-${index}-content`;
-        contentWrapper.className = 'expandable-content';
-        contentWrapper.style.maxHeight = '300px';
-        contentWrapper.style.overflow = 'hidden';
-        contentWrapper.style.position = 'relative';
-        
-        // Add gradient overlay
-        const overlay = document.createElement('div');
-        overlay.className = 'content-overlay';
-        overlay.style.cssText = `
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background: linear-gradient(transparent, white);
-            pointer-events: none;
-        `;
-        
-        contentWrapper.appendChild(content.cloneNode(true));
-        contentWrapper.appendChild(overlay);
-        content.replaceWith(contentWrapper);
-        
-        // Insert toggle button
-        contentWrapper.parentNode.insertBefore(toggleBtn, contentWrapper.nextSibling);
-        
-        // Toggle functionality
-        toggleBtn.addEventListener('click', function() {
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            
-            if (isExpanded) {
-                contentWrapper.style.maxHeight = '300px';
-                this.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
-                overlay.style.display = 'block';
-            } else {
-                contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
-                this.innerHTML = '<i class="fas fa-chevron-up"></i> Show Less';
-                overlay.style.display = 'none';
-            }
-        });
-    });
-}
-
-// Print and download functionality for care guides
-function initPrintDownload() {
-    // Add print buttons to download cards
-    const downloadCards = document.querySelectorAll('.download-card');
-    
-    downloadCards.forEach(card => {
-        const printBtn = document.createElement('button');
-        printBtn.className = 'btn btn-outline';
-        printBtn.style.marginLeft = '10px';
-        printBtn.innerHTML = '<i class="fas fa-print"></i> Print';
-        
-        printBtn.addEventListener('click', function() {
-            printCareGuide();
-        });
-        
-        const existingBtn = card.querySelector('.btn');
-        if (existingBtn) {
-            existingBtn.parentNode.insertBefore(printBtn, existingBtn.nextSibling);
+        // Add loading attribute for performance
+        if (!img.hasAttribute('loading')) {
+            img.setAttribute('loading', 'lazy');
         }
     });
 }
 
-function printCareGuide() {
-    const petType = document.querySelector('h1').textContent.toLowerCase();
-    const printContent = document.querySelector('.page-content').innerHTML;
-    const sidebarContent = document.querySelector('.page-sidebar').innerHTML;
+// Mobile sidebar toggle - SIMPLIFIED
+function initMobileSidebarToggle() {
+    const sidebar = document.querySelector('.page-sidebar');
+    const mainContent = document.querySelector('.page-content');
     
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(`
-        <html>
-        <head>
-            <title>${document.title} - Print</title>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                h1, h2, h3 { color: #003b6d; }
-                .tip-list li { margin-bottom: 8px; }
-                .warning-sign { background: #fff3cd; padding: 10px; margin: 10px 0; }
-                .info-card { background: #f8f9fa; padding: 15px; margin: 15px 0; }
-                @media print {
-                    .no-print { display: none; }
-                }
-            </style>
-        </head>
-        <body>
-            <h1>${document.querySelector('h1').textContent}</h1>
-            ${printContent}
-            <hr>
-            <h2>Quick Reference</h2>
-            ${sidebarContent}
-            <p class="no-print" style="margin-top: 20px; font-size: 0.9em; color: #666;">
-                Printed from Paradigm Pet Professionals - ${new Date().toLocaleDateString()}
-            </p>
-            <script>
-                window.onload = function() { window.print(); };
-            </script>
-        </body>
-        </html>
-    `);
-    printWindow.document.close();
+    if (!sidebar || !mainContent || window.innerWidth > 768) return;
+    
+    // Check if toggle already exists
+    if (document.querySelector('.sidebar-toggle-mobile')) return;
+    
+    // Create toggle button
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'sidebar-toggle-mobile btn btn-secondary';
+    toggleBtn.innerHTML = '<i class="fas fa-info-circle"></i> Quick Tips';
+    toggleBtn.setAttribute('aria-label', 'Toggle sidebar information');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    toggleBtn.style.cssText = 'width: 100%; margin: 10px 0; display: flex; align-items: center; justify-content: center; gap: 8px;';
+    
+    // Insert before sidebar
+    sidebar.parentNode.insertBefore(toggleBtn, sidebar);
+    
+    // Initially hide sidebar on mobile
+    sidebar.style.display = 'none';
+    
+    // Toggle functionality
+    toggleBtn.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        if (isExpanded) {
+            sidebar.style.display = 'none';
+            this.innerHTML = '<i class="fas fa-info-circle"></i> Quick Tips';
+            this.setAttribute('aria-expanded', 'false');
+        } else {
+            sidebar.style.display = 'block';
+            this.innerHTML = '<i class="fas fa-times"></i> Hide Tips';
+            this.setAttribute('aria-expanded', 'true');
+            
+            // Scroll sidebar into view
+            setTimeout(() => {
+                sidebar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+    });
+}
+
+// Responsive tables - SIMPLIFIED
+function initResponsiveTables() {
+    const tables = document.querySelectorAll('table');
+    
+    tables.forEach(table => {
+        // Ensure table is responsive
+        if (table.offsetWidth > window.innerWidth * 0.9) {
+            if (!table.closest('.table-responsive')) {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'table-responsive';
+                wrapper.style.overflowX = 'auto';
+                table.parentNode.insertBefore(wrapper, table);
+                wrapper.appendChild(table);
+            }
+        }
+    });
+}
+
+// Mobile friendly content
+function initMobileFriendlyContent() {
+    if (window.innerWidth <= 768) {
+        // Adjust content sections padding
+        const contentSections = document.querySelectorAll('.content-section');
+        contentSections.forEach(section => {
+            section.style.padding = '15px 10px';
+        });
+        
+        // Adjust lists for better mobile readability
+        const lists = document.querySelectorAll('ul, ol');
+        lists.forEach(list => {
+            list.style.paddingLeft = '20px';
+            list.style.margin = '10px 0';
+        });
+        
+        // Ensure all interactive elements are tappable
+        const interactiveElements = document.querySelectorAll('a, button, [role="button"], input, select, textarea');
+        interactiveElements.forEach(element => {
+            element.style.minHeight = '44px';
+            element.style.minWidth = '44px';
+        });
+    }
 }
 
 // ===== FORM VALIDATION =====
@@ -479,11 +511,8 @@ function initFormValidation() {
             
             if (validateEmail(emailInput.value)) {
                 // Simulate successful submission
-                showFormMessage(ctaForm, 'success', 'Thank you! We\'ll contact you within 24 hours to discuss your pet\'s needs.');
+                showFormMessage(ctaForm, 'success', 'Thank you! We\'ll contact you within 24 hours.');
                 emailInput.value = '';
-                
-                // Analytics event (simulated)
-                console.log('CTA form submitted with email:', emailInput.value);
             } else {
                 showFormMessage(ctaForm, 'error', 'Please enter a valid email address.');
                 emailInput.focus();
@@ -491,66 +520,26 @@ function initFormValidation() {
         });
     }
     
-    // Consultation page form (when we create it)
+    // Consultation form validation
     const consultationForm = document.getElementById('consultationForm');
     if (consultationForm) {
         consultationForm.addEventListener('submit', validateConsultationForm);
-    }
-    
-    // Real-time email validation
-    const emailInputs = document.querySelectorAll('input[type="email"]');
-    emailInputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.value && !validateEmail(this.value)) {
-                showInlineError(this, 'Please enter a valid email address (e.g., name@example.com)');
-            } else {
-                clearInlineError(this);
-            }
-        });
-    });
-    
-    // Real-time phone validation
-    const phoneInputs = document.querySelectorAll('input[type="tel"], input[name="phone"]');
-    phoneInputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.value && !validatePhone(this.value)) {
-                showInlineError(this, 'Please enter a valid 10-digit phone number');
-            } else {
-                clearInlineError(this);
-            }
-        });
         
-        // Format phone number as user types
-        input.addEventListener('input', function() {
-            formatPhoneNumber(this);
-        });
-    });
+        // Mobile optimizations for form
+        if (window.innerWidth <= 768) {
+            const inputs = consultationForm.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.style.fontSize = '16px'; // Prevents iOS zoom
+                input.style.minHeight = '44px';
+            });
+        }
+    }
 }
 
 // Email validation helper
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
-}
-
-// Phone validation helper
-function validatePhone(phone) {
-    // Remove all non-digits
-    const digits = phone.replace(/\D/g, '');
-    return digits.length === 10;
-}
-
-// Phone number formatting
-function formatPhoneNumber(input) {
-    let value = input.value.replace(/\D/g, '');
-    
-    if (value.length > 3 && value.length <= 6) {
-        value = value.replace(/(\d{3})(\d+)/, '($1) $2');
-    } else if (value.length > 6) {
-        value = value.replace(/(\d{3})(\d{3})(\d+)/, '($1) $2-$3');
-    }
-    
-    input.value = value;
 }
 
 // Consultation form validation
@@ -568,48 +557,22 @@ function validateConsultationForm(e) {
         if (!field.value.trim()) {
             showInlineError(field, 'This field is required');
             isValid = false;
-            
-            // Focus on first invalid field
-            if (isValid === false) {
-                field.focus();
-                isValid = null; // Prevent multiple focus calls
-            }
         }
     });
     
-    // Validate email
-    const emailField = form.querySelector('input[type="email"]');
-    if (emailField && emailField.value && !validateEmail(emailField.value)) {
-        showInlineError(emailField, 'Please enter a valid email address');
-        isValid = false;
-    }
-    
-    // Validate phone
-    const phoneField = form.querySelector('input[type="tel"], input[name="phone"]');
-    if (phoneField && phoneField.value && !validatePhone(phoneField.value)) {
-        showInlineError(phoneField, 'Please enter a valid 10-digit phone number');
-        isValid = false;
-    }
-    
-    // Validate pet age (if it's a number field)
-    const ageField = form.querySelector('input[name="petAge"]');
-    if (ageField && ageField.value) {
-        const age = parseInt(ageField.value);
-        if (isNaN(age) || age < 0 || age > 30) {
-            showInlineError(ageField, 'Please enter a valid age between 0 and 30');
-            isValid = false;
+    // Focus first error field
+    if (!isValid) {
+        const firstError = form.querySelector('.error');
+        if (firstError) {
+            firstError.focus();
         }
     }
     
     if (isValid) {
-        // Simulate form submission
-        showFormMessage(form, 'success', 'Thank you for your consultation request! A Pexpert will contact you within 48 hours.');
+        showFormMessage(form, 'success', 'Thank you! We\'ll contact you within 48 hours.');
         form.reset();
-        
-        // In a real implementation, you would send data to a server here
-        console.log('Consultation form submitted successfully');
     } else {
-        showFormMessage(form, 'error', 'Please correct the errors above and try again.');
+        showFormMessage(form, 'error', 'Please correct the errors above.');
     }
 }
 
@@ -621,23 +584,19 @@ function showInlineError(field, message) {
     errorDiv.className = 'field-error';
     errorDiv.textContent = message;
     errorDiv.setAttribute('role', 'alert');
+    errorDiv.style.cssText = 'color: #f44336; font-size: 14px; margin-top: 5px;';
     
-    field.parentNode.insertBefore(errorDiv, field.nextSibling);
+    field.parentNode.appendChild(errorDiv);
     field.classList.add('error');
-    field.setAttribute('aria-invalid', 'true');
-    
-    // Announce error to screen readers
-    announceToScreenReader(message);
+    field.style.borderColor = '#f44336';
 }
 
 // Clear inline error
 function clearInlineError(field) {
     const existingError = field.parentNode.querySelector('.field-error');
-    if (existingError) {
-        existingError.remove();
-    }
+    if (existingError) existingError.remove();
     field.classList.remove('error');
-    field.setAttribute('aria-invalid', 'false');
+    field.style.borderColor = '';
 }
 
 // Clear all form errors
@@ -645,54 +604,58 @@ function clearAllFormErrors(form) {
     form.querySelectorAll('.field-error').forEach(error => error.remove());
     form.querySelectorAll('.error').forEach(field => {
         field.classList.remove('error');
-        field.setAttribute('aria-invalid', 'false');
+        field.style.borderColor = '';
     });
 }
 
-// Show form success/error message
+// Show form message
 function showFormMessage(form, type, message) {
     // Remove existing messages
     const existingMessage = form.querySelector('.form-message');
-    if (existingMessage) {
-        existingMessage.remove();
-    }
+    if (existingMessage) existingMessage.remove();
     
     // Create new message
     const messageDiv = document.createElement('div');
     messageDiv.className = `form-message form-message-${type}`;
     messageDiv.setAttribute('role', 'alert');
     messageDiv.textContent = message;
+    messageDiv.style.cssText = 'padding: 15px; margin: 15px 0; border-radius: 5px; font-weight: 500;';
     
-    // Insert at beginning of form
+    if (type === 'success') {
+        messageDiv.style.backgroundColor = '#e8f5e9';
+        messageDiv.style.color = '#2e7d32';
+        messageDiv.style.borderLeft = '4px solid #4caf50';
+    } else {
+        messageDiv.style.backgroundColor = '#ffebee';
+        messageDiv.style.color = '#c62828';
+        messageDiv.style.borderLeft = '4px solid #f44336';
+    }
+    
     form.insertBefore(messageDiv, form.firstChild);
     
-    // Announce to screen readers
-    announceToScreenReader(message);
+    // Scroll to message on mobile
+    if (window.innerWidth <= 768) {
+        setTimeout(() => {
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 100);
+    }
     
-    // Scroll to message if it's not visible
-    messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    
-    // Remove message after 10 seconds (for success messages)
+    // Remove success message after delay
     if (type === 'success') {
         setTimeout(() => {
-            if (messageDiv.parentNode) {
-                messageDiv.remove();
-            }
-        }, 10000);
+            if (messageDiv.parentNode) messageDiv.remove();
+        }, 5000);
     }
 }
 
 // ===== SMOOTH SCROLLING =====
 function initSmoothScrolling() {
-    // Handle anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        // Skip dropdown toggles
         if (anchor.classList.contains('dropdown-toggle')) return;
         
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             
-            // Only process actual anchor links (not # alone)
             if (href !== '#' && href.length > 1) {
                 e.preventDefault();
                 
@@ -704,19 +667,33 @@ function initSmoothScrolling() {
                     const primaryNav = document.querySelector('.primary-nav');
                     if (primaryNav && primaryNav.classList.contains('active')) {
                         primaryNav.classList.remove('active');
-                        document.querySelector('.mobile-menu-toggle').setAttribute('aria-expanded', 'false');
+                        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                        if (mobileToggle) {
+                            mobileToggle.setAttribute('aria-expanded', 'false');
+                            mobileToggle.classList.remove('active');
+                        }
+                        document.body.style.overflow = '';
+                        document.body.style.position = '';
+                    }
+                    
+                    // Calculate offset for header
+                    let offset = 80;
+                    if (window.innerWidth <= 768) {
+                        offset = 60;
                     }
                     
                     // Scroll to target
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                     
-                    // Update URL without page jump
+                    // Update URL
                     history.pushState(null, null, href);
                     
-                    // Focus on target for accessibility
+                    // Focus for accessibility
                     targetElement.setAttribute('tabindex', '-1');
                     targetElement.focus();
                     setTimeout(() => targetElement.removeAttribute('tabindex'), 1000);
@@ -728,94 +705,77 @@ function initSmoothScrolling() {
 
 // ===== ACCESSIBILITY FEATURES =====
 function initAccessibilityFeatures() {
-    // Add aria-labels to decorative icons
-    document.querySelectorAll('.fas, .fab').forEach(icon => {
-        if (!icon.hasAttribute('aria-label') && !icon.closest('button, a')) {
-            // Get icon purpose from class names
-            const iconClass = Array.from(icon.classList).find(cls => cls.startsWith('fa-'));
-            if (iconClass) {
-                const label = iconClass.replace('fa-', '').replace('-', ' ') + ' icon';
-                icon.setAttribute('aria-label', label);
+    // Add aria-labels to icons without text
+    document.querySelectorAll('.fas, .fab, .fa').forEach(icon => {
+        if (!icon.hasAttribute('aria-label') && 
+            !icon.closest('button, a, [aria-label], [aria-labelledby]')) {
+            const iconType = icon.className.match(/fa-([\w-]+)/);
+            if (iconType) {
+                icon.setAttribute('aria-label', iconType[1].replace(/-/g, ' ') + ' icon');
             }
         }
     });
     
-    // Handle focus trapping for dropdowns on mobile
+    // Ensure all images have alt text
+    document.querySelectorAll('img:not([alt])').forEach(img => {
+        if (!img.hasAttribute('alt')) {
+            const altText = img.src.split('/').pop().split('.')[0].replace(/[_-]/g, ' ') || 'image';
+            img.setAttribute('alt', altText);
+        }
+    });
+    
+    // Skip to content link
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'skip-to-content';
+    skipLink.textContent = 'Skip to main content';
+    skipLink.style.cssText = 'position: absolute; top: -40px; left: 0; background: #003B6D; color: white; padding: 10px; z-index: 10000;';
+    
+    document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // Focus management for modals/dropdowns
     document.addEventListener('keydown', function(e) {
-        const openDropdown = document.querySelector('.dropdown.open');
-        
-        if (openDropdown && e.key === 'Tab') {
-            const focusableElements = openDropdown.querySelectorAll('a, button, input');
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-            
-            if (e.shiftKey && document.activeElement === firstElement) {
-                e.preventDefault();
-                lastElement.focus();
-            } else if (!e.shiftKey && document.activeElement === lastElement) {
-                e.preventDefault();
-                firstElement.focus();
+        if (e.key === 'Tab') {
+            const activeDropdown = document.querySelector('.dropdown.open');
+            if (activeDropdown) {
+                const focusable = activeDropdown.querySelectorAll('a, button, input, [tabindex]:not([tabindex="-1"])');
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
             }
         }
     });
-    
-    // Announce dynamic content to screen readers
-    window.announceToScreenReader = announceToScreenReader;
-}
-
-// Screen reader announcement function
-function announceToScreenReader(message, priority = 'polite') {
-    // Create or get announcement div
-    let announcementDiv = document.getElementById('screen-reader-announcement');
-    
-    if (!announcementDiv) {
-        announcementDiv = document.createElement('div');
-        announcementDiv.id = 'screen-reader-announcement';
-        announcementDiv.setAttribute('aria-live', 'polite');
-        announcementDiv.setAttribute('aria-atomic', 'true');
-        announcementDiv.style.cssText = `
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        `;
-        document.body.appendChild(announcementDiv);
-    }
-    
-    // Update priority if needed
-    if (priority === 'assertive') {
-        announcementDiv.setAttribute('aria-live', 'assertive');
-    } else {
-        announcementDiv.setAttribute('aria-live', 'polite');
-    }
-    
-    // Update message
-    announcementDiv.textContent = message;
-    
-    // Clear message after a delay (so it can be announced again)
-    setTimeout(() => {
-        if (announcementDiv.textContent === message) {
-            announcementDiv.textContent = '';
-        }
-    }, 1000);
 }
 
 // ===== DYNAMIC CONTENT =====
 function initDynamicContent() {
+    // Update current year in footer
+    const yearElements = document.querySelectorAll('.current-year');
+    if (yearElements.length > 0) {
+        const currentYear = new Date().getFullYear();
+        yearElements.forEach(element => {
+            element.textContent = currentYear;
+        });
+    }
+    
+    // Highlight active navigation item
+    highlightActiveNavItem();
+    
     // Lazy load images
     if ('IntersectionObserver' in window) {
         const lazyImages = document.querySelectorAll('img[data-src]');
-        
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.getAttribute('data-src');
+                    img.src = img.dataset.src;
                     img.removeAttribute('data-src');
                     imageObserver.unobserve(img);
                 }
@@ -824,93 +784,31 @@ function initDynamicContent() {
         
         lazyImages.forEach(img => imageObserver.observe(img));
     }
-    
-    // Add current year to footer
-    const yearSpans = document.querySelectorAll('.current-year');
-    if (yearSpans.length > 0) {
-        const currentYear = new Date().getFullYear();
-        yearSpans.forEach(span => {
-            span.textContent = currentYear;
-        });
-    }
-    
-    // Highlight active nav item based on current page
-    highlightActiveNavItem();
-    
-    // Add loading states to buttons
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function() {
-            const submitButton = this.querySelector('button[type="submit"]');
-            if (submitButton) {
-                const originalText = submitButton.textContent;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                submitButton.disabled = true;
-                
-                // Reset button after 5 seconds (in case of error)
-                setTimeout(() => {
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                }, 5000);
-            }
-        });
-    });
 }
 
-// Highlight active navigation item - UPDATED FOR ALL PET PAGES
+// Highlight active navigation item
 function highlightActiveNavItem() {
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    console.log('Current page:', currentPage);
     
-    // Find all navigation links
-    const allNavLinks = document.querySelectorAll('a');
-    
-    allNavLinks.forEach(link => {
+    document.querySelectorAll('a').forEach(link => {
         const linkHref = link.getAttribute('href');
         
-        // Remove existing active states
+        // Reset
         link.classList.remove('active');
         link.removeAttribute('aria-current');
         
-        // Check if this link points to current page
+        // Check if active
         if (linkHref === currentPage || 
             (currentPage === '' && linkHref === 'index.html') ||
-            (currentPage === 'index.html' && linkHref === 'index.html') ||
             (linkHref && linkHref.includes(currentPage.replace('.html', '')))) {
             
             link.classList.add('active');
             link.setAttribute('aria-current', 'page');
-            
-            // Also highlight parent dropdown if exists
-            const parentDropdown = link.closest('.dropdown');
-            if (parentDropdown) {
-                const dropdownToggle = parentDropdown.querySelector('a');
-                if (dropdownToggle) {
-                    dropdownToggle.classList.add('active');
-                }
-            }
         }
     });
-    
-    // Special handling for pet pages dropdown
-    const petPages = ['cats.html', 'dogs.html', 'birds.html', 'fish.html', 'small-animals.html'];
-    if (petPages.includes(currentPage)) {
-        // Find and highlight "Pet Care Guides" parent item
-        const petGuidesLinks = document.querySelectorAll('a[href*="cats.html"], a[href*="dogs.html"]');
-        petGuidesLinks.forEach(link => {
-            const parentLi = link.closest('li');
-            if (parentLi && parentLi.parentElement.classList.contains('dropdown-menu')) {
-                const dropdownToggle = parentLi.closest('.dropdown').querySelector('.dropdown-toggle');
-                if (dropdownToggle) {
-                    dropdownToggle.classList.add('active');
-                }
-            }
-        });
-    }
 }
 
 // ===== UTILITY FUNCTIONS =====
-
-// Debounce function for performance
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -923,7 +821,6 @@ function debounce(func, wait) {
     };
 }
 
-// Throttle function for performance
 function throttle(func, limit) {
     let inThrottle;
     return function() {
@@ -939,77 +836,64 @@ function throttle(func, limit) {
 
 // ===== WINDOW RESIZE HANDLER =====
 window.addEventListener('resize', debounce(function() {
-    // Close mobile menu when resizing to desktop
-    if (window.innerWidth > 768) {
+    const width = window.innerWidth;
+    
+    // Close mobile menu on desktop
+    if (width > 768) {
         const primaryNav = document.querySelector('.primary-nav');
         if (primaryNav && primaryNav.classList.contains('active')) {
             primaryNav.classList.remove('active');
-            const mobileToggle = document.querySelector('.mobile-menu-toggle');
-            if (mobileToggle) {
-                mobileToggle.setAttribute('aria-expanded', 'false');
-                
-                // Reset icon
-                const icon = mobileToggle.querySelector('i');
-                if (icon) {
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
-            }
+            document.body.style.overflow = '';
+            document.body.style.position = '';
         }
         
-        // Close all dropdowns on desktop resize
-        document.querySelectorAll('.dropdown.open, .nav-menu li.open').forEach(dropdown => {
+        // Close dropdowns
+        document.querySelectorAll('.dropdown.open').forEach(dropdown => {
             dropdown.classList.remove('open');
         });
+        
+        // Show sidebar if hidden
+        const sidebar = document.querySelector('.page-sidebar');
+        if (sidebar) {
+            sidebar.style.display = 'block';
+        }
+        
+        // Hide sidebar toggle
+        const sidebarToggle = document.querySelector('.sidebar-toggle-mobile');
+        if (sidebarToggle) {
+            sidebarToggle.style.display = 'none';
+        }
     }
     
-    // Reinitialize pet page features on resize
-    const isPetPage = window.location.pathname.includes('cats.html') ||
-                     window.location.pathname.includes('dogs.html') ||
-                     window.location.pathname.includes('birds.html') ||
-                     window.location.pathname.includes('fish.html') ||
-                     window.location.pathname.includes('small-animals.html');
+    // Reinitialize responsive features
+    preventHorizontalOverflow();
+    adjustMobileLayout();
     
-    if (isPetPage) {
-        initMobileSidebar();
-        initComparisonTables();
+    // Update dropdown hover behavior
+    if (width > 1024) {
+        document.querySelectorAll('.dropdown').forEach(initDesktopDropdownHover);
     }
 }, 250));
 
-// ===== ERROR HANDLING =====
-window.addEventListener('error', function(e) {
-    console.error('JavaScript Error:', e.error);
+// ===== INITIALIZE ON LOAD =====
+window.addEventListener('load', function() {
+    preventHorizontalOverflow();
+    adjustMobileLayout();
     
-    // Don't show error messages to users in production
-    // In development, you might want to display them
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        // Show error in console only for development
-    }
+    // Add loaded class for transitions
+    setTimeout(() => {
+        document.body.classList.add('page-loaded');
+    }, 100);
 });
 
-// ===== PET PAGES INITIALIZATION =====
-// Check if we're on a pet page and run initialization
-function checkAndInitPetPages() {
-    const petPagePattern = /(cats|dogs|birds|fish|small-animals)\.html$/i;
-    if (petPagePattern.test(window.location.pathname)) {
-        initPetPagesFeatures();
+// ===== ERROR HANDLING =====
+window.addEventListener('error', function(e) {
+    console.error('Error:', e.message);
+    
+    // User-friendly error handling
+    if (e.message.includes('dropdown') || e.message.includes('navigation')) {
+        console.warn('Navigation error detected. Attempting recovery...');
+        setTimeout(initMobileNavigation, 100);
+        setTimeout(initDropdowns, 100);
     }
-}
-
-// Run check on page load and navigation
-checkAndInitPetPages();
-
-// ===== EXPORT FUNCTIONS FOR TESTING =====
-// (Only in development)
-if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    window.PPP = {
-        validateEmail,
-        validatePhone,
-        showInlineError,
-        clearInlineError,
-        showFormMessage,
-        announceToScreenReader,
-        initPetPagesFeatures,
-        highlightActiveNavItem
-    };
-}
+});

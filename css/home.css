@@ -6,6 +6,8 @@ Paradigm Pet Professionals - Home Page Styles
 .hero {
     padding: var(--space-xl) 0;
     background: linear-gradient(135deg, rgba(0, 59, 109, 0.05) 0%, rgba(102, 153, 204, 0.05) 100%);
+    position: relative;
+    overflow: hidden;
 }
 
 .hero-grid {
@@ -27,15 +29,28 @@ Paradigm Pet Professionals - Home Page Styles
 
 .hero-buttons {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
+    gap: var(--space-md);
     max-width: 400px;
+}
+
+.hero-buttons .btn {
+    flex: 1;
+    min-width: 140px;
+}
+
+.hero-image {
+    position: relative;
 }
 
 .hero-image img {
     width: 100%;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
+    transition: transform var(--transition-normal);
+}
+
+.hero-image:hover img {
+    transform: scale(1.02);
 }
 
 /* ===== SERVICES SECTION ===== */
@@ -50,24 +65,43 @@ Paradigm Pet Professionals - Home Page Styles
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-lg);
     margin-top: var(--space-lg);
+}
+
+.service-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .service-icon {
     font-size: 2.5rem;
     color: var(--primary-light);
     margin-bottom: var(--space-md);
+    display: inline-block;
 }
 
 .service-card h3 {
     margin-bottom: var(--space-sm);
+    min-height: 3.5rem;
 }
 
 .service-card p {
     margin-bottom: var(--space-md);
     color: var(--secondary-dark);
+    flex-grow: 1;
 }
 
 .service-link {
@@ -75,12 +109,24 @@ Paradigm Pet Professionals - Home Page Styles
     font-weight: 600;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    transition: all var(--transition-fast);
+}
+
+.service-link::after {
+    content: "→";
+    font-weight: bold;
+    transition: transform var(--transition-fast);
 }
 
 .service-link:hover {
     color: var(--primary-dark);
     text-decoration: none;
+    gap: 12px;
+}
+
+.service-link:hover::after {
+    transform: translateX(3px);
 }
 
 /* ===== FEATURED GUIDES ===== */
@@ -95,15 +141,33 @@ Paradigm Pet Professionals - Home Page Styles
 
 .guides-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-lg);
     margin-top: var(--space-lg);
+}
+
+.guide-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .guide-card img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.guide-card:hover img {
+    transform: scale(1.05);
 }
 
 .guide-content {
@@ -116,23 +180,42 @@ Paradigm Pet Professionals - Home Page Styles
 
 .guide-content p {
     margin-bottom: var(--space-md);
+    color: var(--secondary-dark);
 }
 
 .guide-content .btn {
     width: 100%;
+    margin-top: auto;
 }
 
 /* ===== CTA SECTION ===== */
 .cta-section {
     padding: var(--space-xl) 0;
-    background-color: var(--primary-dark);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #00509E 100%);
     color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.1;
+    pointer-events: none;
 }
 
 .cta-content {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .cta-content h2 {
@@ -144,30 +227,43 @@ Paradigm Pet Professionals - Home Page Styles
     font-size: 1.125rem;
     margin-bottom: var(--space-lg);
     color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cta-form {
     max-width: 500px;
     margin: 0 auto var(--space-md);
+    display: flex;
+    gap: var(--space-sm);
 }
 
 .cta-form input {
     flex: 1;
-    padding: 0.75rem 1rem;
+    padding: 0.875rem 1.25rem;
     border: none;
     border-radius: var(--radius-md);
     font-family: var(--font-body);
     font-size: 1rem;
+    transition: box-shadow var(--transition-fast);
+}
+
+.cta-form input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
 .form-note {
     color: rgba(255, 255, 255, 0.8);
     font-size: 0.9rem;
+    margin-top: var(--space-sm);
 }
 
 .form-note a {
     color: var(--white);
     font-weight: 600;
+    text-decoration: underline;
 }
 
 /* ===== TRUST SECTION ===== */
@@ -183,12 +279,17 @@ Paradigm Pet Professionals - Home Page Styles
 
 .trust-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--space-lg);
 }
 
 .trust-item {
     padding: var(--space-lg);
+    transition: transform var(--transition-normal);
+}
+
+.trust-item:hover {
+    transform: translateY(-5px);
 }
 
 .trust-number {
@@ -196,12 +297,14 @@ Paradigm Pet Professionals - Home Page Styles
     font-weight: 800;
     color: var(--primary-light);
     margin-bottom: var(--space-xs);
+    line-height: 1;
 }
 
 .trust-icon {
     font-size: 3rem;
     color: var(--primary-light);
     margin-bottom: var(--space-xs);
+    display: inline-block;
 }
 
 .trust-text {
@@ -209,7 +312,74 @@ Paradigm Pet Professionals - Home Page Styles
     font-weight: 600;
     color: var(--primary-dark);
 }
-nav {
-  overflow-x: auto;
-  white-space: nowrap;
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 992px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .hero-content {
+        text-align: center;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+        max-width: none;
+    }
+    
+    .services-grid,
+    .guides-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid,
+    .guides-grid,
+    .trust-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .cta-form {
+        flex-direction: column;
+    }
+    
+    .service-card,
+    .guide-card {
+        padding: var(--space-md);
+    }
+    
+    .hero {
+        padding: var(--space-lg) 0;
+    }
+    
+    .services,
+    .featured-guides,
+    .cta-section,
+    .trust-section {
+        padding: var(--space-lg) 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .service-card h3,
+    .guide-content h3 {
+        font-size: 1.25rem;
+    }
 }

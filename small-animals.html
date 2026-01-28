@@ -3,290 +3,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Small Animals Care Guide | Paradigm Pet Professionals</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="Complete guide to small animal care: housing, diet, socialization, and creating the perfect environment for rabbits, guinea pigs, hamsters, and more.">
+    <title>Small Animal Care Guide | Paradigm Pet Professionals</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pet-pages.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Small Animal specific styles */
+        .small-animal-hero {
+            background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/small-animal-hero.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin: var(--space-xl) 0;
+        }
+        
+        .species-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: transform var(--transition-normal);
+        }
+        
+        .species-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .species-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .species-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .species-content {
+            padding: var(--space-lg);
+        }
+        
+        .species-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin: var(--space-md) 0;
+        }
+        
+        .feature-tag {
+            background: var(--light-gray);
+            color: var(--primary-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .housing-guide {
+            background: #f3e5f5;
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            border-left: 4px solid #9c27b0;
+            margin: var(--space-xl) 0;
+        }
+        
+        .enclosure-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .enclosure-card {
+            background: var(--white);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+        }
+        
+        .enclosure-icon {
+            font-size: 2rem;
+            color: #9c27b0;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .supplies-checklist {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-xs) 0;
+        }
+        
+        .checklist-icon {
+            color: var(--success);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .enclosure-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .supplies-checklist {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-paw"></i>
-                <span>Paradigm Pet Professionals</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li class="dropdown">
-                    <a href="cats.html">Pet Care Guides <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="cats.html">Cats</a></li>
-                        <li><a href="dogs.html">Dogs</a></li>
-                        <li><a href="birds.html">Birds</a></li>
-                        <li><a href="fish.html">Fish</a></li>
-                        <li><a href="small-animals.html" class="active">Small Animals</a></li>
-                    </ul>
-                </li>
-                <li><a href="consultation.html">Consultation</a></li>
-                <li><a href="resources.html">Resources</a></li>
-                <li><a href="about.html">About Us</a></li>
-            </ul>
-            <a href="consultation.html" class="btn btn-primary">Book Consultation</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="page-hero small-animals-hero">
+    <!-- Header & Navigation -->
+    <header class="site-header">
         <div class="container">
-            <h1>Small Animals Care Guide</h1>
-            <p>Essential care information for hamsters, guinea pigs, rabbits, and other small pets</p>
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="Paradigm Pet Professionals Logo" width="250">
+                    </a>
+                </div>
+                <nav class="primary-nav" aria-label="Main Navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle active">Pet Care Guides <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cats.html">Cats</a></li>
+                                <li><a href="dogs.html">Dogs</a></li>
+                                <li><a href="birds.html">Birds</a></li>
+                                <li><a href="fish.html">Fish</a></li>
+                                <li><a href="small-animals.html" class="active">Small Animals</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </nav>
+                <a href="consultation.html" class="btn btn-primary btn-header">Schedule Now</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero small-animal-hero">
+        <div class="container">
+            <h1>Small Animal Care Guide</h1>
+            <p>Housing, diet, socialization, and creating the perfect environment for rabbits, guinea pigs, hamsters, and other small pets.</p>
         </div>
     </section>
 
     <!-- Main Content -->
-    <main class="container">
-        <div class="page-container">
-            <!-- Left Column - Main Content -->
-            <div class="page-content">
-                <div class="intro-section">
-                    <h2>Small Animal Care Essentials</h2>
-                    <p>Small mammals like hamsters, guinea pigs, rabbits, ferrets, and others can be wonderful pets. Each species has unique needs for housing, diet, and socialization. Our guide covers the essentials for keeping your small pet healthy and happy.</p>
+    <main class="container page-container">
+        <div class="page-content">
+            <!-- Introduction -->
+            <section class="content-section">
+                <h2>Welcome to the World of Small Pets!</h2>
+                <p>Sometimes we want a pet in our life but think it's impossible because we are not home enough to take care of it, or we don't have enough room. Consider adopting a small animal such as a hermit crab, mouse, gerbil, hamster, guinea pig, or even a chinchilla!</p>
+                <p>Depending on which type of animal you adopt, you can provide a comfortable environment using anything from small to large cages or glass aquariums. Our "Pexperts" are here to help you decide which pet is right for you and how to provide them with a happy home.</p>
+                <div class="content-image">
+                    <img src="assets/images/small-animal-intro.jpg" alt="Variety of small pets including guinea pigs and hamsters">
+                </div>
+            </section>
+
+            <!-- Species Overview -->
+            <section class="content-section">
+                <h2>Popular Small Animal Species</h2>
+                <p>Each small animal has unique needs and characteristics. Here's an overview of the most popular species:</p>
+                
+                <div class="species-grid">
+                    <!-- Guinea Pig Card -->
+                    <div class="species-card">
+                        <div class="species-image">
+                            <img src="assets/images/guinea-pig.jpg" alt="Guinea pigs eating vegetables">
+                        </div>
+                        <div class="species-content">
+                            <h3>Guinea Pigs</h3>
+                            <p>Social, vocal rodents that require daily vitamin C and spacious living areas. They thrive in pairs or groups.</p>
+                            <div class="species-features">
+                                <span class="feature-tag">Social Animals</span>
+                                <span class="feature-tag">Daily Vitamin C</span>
+                                <span class="feature-tag">7-8 Year Lifespan</span>
+                            </div>
+                            <a href="https://www.animalhumanesociety.org/adoption/guinea-pig-care" target="_blank" class="btn btn-secondary btn-small">Learn More</a>
+                        </div>
+                    </div>
                     
-                    <div class="pet-intro-image">
-                        <img src="assets/images/small-animals-intro.jpg" alt="Various small pets together">
+                    <!-- Hamster Card -->
+                    <div class="species-card">
+                        <div class="species-image">
+                            <img src="assets/images/hamster.jpg" alt="Hamster in wheel">
+                        </div>
+                        <div class="species-content">
+                            <h3>Hamsters</h3>
+                            <p>Nocturnal, solitary creatures that need plenty of bedding for burrowing and large wheels for exercise.</p>
+                            <div class="species-features">
+                                <span class="feature-tag">Nocturnal</span>
+                                <span class="feature-tag">Solitary</span>
+                                <span class="feature-tag">2-3 Year Lifespan</span>
+                            </div>
+                            <a href="https://www.pdsa.org.uk/taking-care-of-your-pet/looking-after-your-pet/small-pets/the-ideal-home-for-your-hamster" target="_blank" class="btn btn-secondary btn-small">Learn More</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Rabbit Card -->
+                    <div class="species-card">
+                        <div class="species-image">
+                            <img src="assets/images/rabbit.jpg" alt="Rabbit in habitat">
+                        </div>
+                        <div class="species-content">
+                            <h3>Rabbits</h3>
+                            <p>Intelligent, social animals that require large enclosures, daily exercise, and specialized veterinary care.</p>
+                            <div class="species-features">
+                                <span class="feature-tag">Litter Trainable</span>
+                                <span class="feature-tag">8-12 Year Lifespan</span>
+                                <span class="feature-tag">Hay-Based Diet</span>
+                            </div>
+                            <a href="#" class="btn btn-secondary btn-small">Learn More</a>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Species Comparison -->
-                <section class="content-section">
-                    <h3><i class="fas fa-clipboard-list"></i> Species Comparison Guide</h3>
+            <!-- Housing Guide -->
+            <section class="content-section">
+                <div class="housing-guide">
+                    <h3><i class="fas fa-home"></i> Housing & Environment Guide</h3>
+                    <p>You will need to provide amenities for your new pet, such as bedding or substrate, toys, an exercise wheel, a water dish or drip bottle, a food dish, and grooming equipment.</p>
                     
-                    <div class="comparison-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Species</th>
-                                    <th>Lifespan</th>
-                                    <th>Housing Size</th>
-                                    <th>Social Needs</th>
-                                    <th>Diet</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Guinea Pig</td>
-                                    <td>5-7 years</td>
-                                    <td>Minimum 7.5 sq ft</td>
-                                    <td>Highly social (pairs/groups)</td>
-                                    <td>Hay, pellets, fresh veggies</td>
-                                </tr>
-                                <tr>
-                                    <td>Rabbit</td>
-                                    <td>8-12 years</td>
-                                    <td>Minimum 12 sq ft</td>
-                                    <td>Social (pairs recommended)</td>
-                                    <td>Hay, pellets, leafy greens</td>
-                                </tr>
-                                <tr>
-                                    <td>Hamster</td>
-                                    <td>2-3 years</td>
-                                    <td>450+ sq inches floor</td>
-                                    <td>Solitary</td>
-                                    <td>Commercial mix, fresh foods</td>
-                                </tr>
-                                <tr>
-                                    <td>Ferreet</td>
-                                    <td>6-10 years</td>
-                                    <td>Multi-level cage</td>
-                                    <td>Highly social</td>
-                                    <td>High-protein carnivore diet</td>
-                                </tr>
-                                <tr>
-                                    <td>Rat</td>
-                                    <td>2-3 years</td>
-                                    <td>2+ cubic feet per rat</td>
-                                    <td>Highly social (same-sex pairs)</td>
-                                    <td>Commercial blocks, fresh foods</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="enclosure-types">
+                        <div class="enclosure-card">
+                            <div class="enclosure-icon">
+                                <i class="fas fa-vector-square"></i>
+                            </div>
+                            <h4>Cage Systems</h4>
+                            <p>Multi-level cages with solid flooring, appropriate bar spacing, and ample floor space.</p>
+                        </div>
+                        
+                        <div class="enclosure-card">
+                            <div class="enclosure-icon">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <h4>Bin Cages</h4>
+                            <p>DIY enclosures made from plastic storage bins with ventilation added. Great for hamsters and mice.</p>
+                        </div>
+                        
+                        <div class="enclosure-card">
+                            <div class="enclosure-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <h4>Aquarium Tanks</h4>
+                            <p>Glass aquariums with secure lids. Ideal for small rodents and reptiles that need deep bedding.</p>
+                        </div>
                     </div>
-                </section>
-
-                <!-- Housing Requirements -->
-                <section class="content-section">
-                    <h3><i class="fas fa-home"></i> Housing & Environment</h3>
                     
-                    <div class="info-card">
-                        <h4>Essential Housing Requirements</h4>
-                        <ul class="tip-list">
-                            <li><strong>Space:</strong> Provide adequate space for exercise and species-specific behaviors</li>
-                            <li><strong>Bedding:</strong> Use safe, absorbent bedding (avoid cedar/pine for most species)</li>
-                            <li><strong>Hideouts:</strong> Multiple hiding places for security</li>
-                            <li><strong>Enrichment:</strong> Toys, tunnels, chew items, and climbing opportunities</li>
-                            <li><strong>Temperature:</strong> Maintain 65-75°F (18-24°C) for most species</li>
-                            <li><strong>Cleanliness:</strong> Spot clean daily, deep clean weekly</li>
+                    <div class="age-stage" style="margin-top: var(--space-lg);">
+                        <h4>Minimum Space Requirements:</h4>
+                        <ul>
+                            <li><strong>Hamsters:</strong> 450+ square inches of continuous floor space</li>
+                            <li><strong>Guinea Pigs:</strong> 7.5+ square feet for one, 10.5+ for two</li>
+                            <li><strong>Rabbits:</strong> 12+ square feet with daily exercise time</li>
+                            <li><strong>Mice/Gerbils:</strong> 300+ square inches with deep bedding</li>
                         </ul>
                     </div>
+                </div>
+            </section>
+
+            <!-- Supplies Checklist -->
+            <section class="content-section">
+                <h2>Essential Supplies Checklist</h2>
+                
+                <div class="supplies-checklist">
+                    <div>
+                        <h3>Housing Essentials</h3>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Appropriately sized cage or enclosure</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Safe, absorbent bedding (paper, aspen, hay)</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Hide houses and shelters</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Exercise wheel (appropriately sized)</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Chew toys and enrichment items</div>
+                        </div>
+                    </div>
                     
-                    <div class="content-image">
-                        <img src="assets/images/small-animal-habitat.jpg" alt="Proper small animal habitat setup">
-                        <p class="image-caption">An enriched habitat with proper bedding, hideouts, and toys</p>
+                    <div>
+                        <h3>Feeding & Care</h3>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Species-appropriate food</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Fresh hay (for herbivores)</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Water bottle or bowl</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Food dishes (heavy, tip-proof)</div>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="checklist-icon"><i class="fas fa-check-circle"></i></div>
+                            <div>Grooming supplies (brushes, nail clippers)</div>
+                        </div>
                     </div>
-                </section>
+                </div>
+            </section>
 
-                <!-- Diet & Nutrition -->
-                <section class="content-section">
-                    <h3><i class="fas fa-utensils"></i> Diet & Nutrition</h3>
+            <!-- Social Needs -->
+            <section class="content-section">
+                <h2>Social Needs & Companionship</h2>
+                <p>You also need to consider if your new pet will need a friend or if it will be happy living alone. Different species have different social requirements:</p>
+                
+                <div class="age-stage">
+                    <h3>Social Animals (Need Companions)</h3>
+                    <ul>
+                        <li><strong>Guinea Pigs:</strong> Highly social, should never be kept alone</li>
+                        <li><strong>Rabbits:</strong> Bond strongly with other rabbits</li>
+                        <li><strong>Rats:</strong> Intelligent and social, thrive in pairs or groups</li>
+                        <li><strong>Gerbils:</strong> Live in family groups in the wild</li>
+                    </ul>
+                </div>
+                
+                <div class="age-stage">
+                    <h3>Solitary Animals (Prefer to Live Alone)</h3>
+                    <ul>
+                        <li><strong>Hamsters:</strong> Territorial and will fight if housed together</li>
+                        <li><strong>Syrian Hamsters:</strong> Must be housed singly after 8 weeks old</li>
+                        <li><strong>Some Reptile Species:</strong> Many are solitary by nature</li>
+                    </ul>
+                </div>
+                
+                <div class="important-note">
+                    <p><strong>Important:</strong> Never house different species together. Each species has different needs, diets, and communication methods. Mixed-species housing can lead to stress, injury, or even predation.</p>
+                </div>
+            </section>
+
+            <!-- Additional Resources -->
+            <section class="content-section">
+                <h2>Additional Care Resources</h2>
+                <p>Here are some resources to get you started with specific small animal care:</p>
+                
+                <div class="resource-cards" style="margin-top: var(--space-lg);">
+                    <div class="resource-card">
+                        <h4>Mouse Care</h4>
+                        <p>Comprehensive guide to housing, feeding, and caring for pet mice.</p>
+                        <a href="https://www.bluecross.org.uk/pet-advice/caring-your-mouse" target="_blank" class="resource-link">
+                            Visit Resource <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
                     
-                    <div class="diet-grid">
-                        <div class="diet-card">
-                            <h4><i class="fas fa-seedling"></i> Herbivores</h4>
-                            <p><strong>Guinea Pigs & Rabbits:</strong> Unlimited hay (80%), fresh veggies (15%), pellets (5%)</p>
-                            <p><strong>Important:</strong> Vitamin C supplementation for guinea pigs</p>
-                        </div>
-                        <div class="diet-card">
-                            <h4><i class="fas fa-drumstick-bite"></i> Omnivores</h4>
-                            <p><strong>Rats & Hamsters:</strong> Commercial blocks/mix (85%), fresh foods (10%), treats (5%)</p>
-                            <p><strong>Important:</strong> Protein control for rats to prevent tumors</p>
-                        </div>
-                        <div class="diet-card">
-                            <h4><i class="fas fa-fish"></i> Carnivores</h4>
-                            <p><strong>Ferrets:</strong> High-protein, high-fat diet. Raw or premium ferret food only</p>
-                            <p><strong>Important:</strong> No carbohydrates or plant-based foods</p>
-                        </div>
+                    <div class="resource-card">
+                        <h4>Hermit Crab Care</h4>
+                        <p>Habitat setup, molting care, and proper environment for hermit crabs.</p>
+                        <a href="https://pethermitcrabs.org/cage-habitat/" target="_blank" class="resource-link">
+                            Visit Resource <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
-                </section>
-
-                <!-- Health Warning Signs -->
-                <section class="content-section">
-                    <h3><i class="fas fa-heartbeat"></i> Health Warning Signs</h3>
-                    <div class="warning-signs">
-                        <div class="warning-sign">
-                            <div class="sign-icon">
-                                <i class="fas fa-weight"></i>
-                            </div>
-                            <div class="sign-content">
-                                <h4>Weight Loss/Overgrown Teeth</h4>
-                                <p>Common in rabbits/guinea pigs. Provide unlimited hay for dental wear.</p>
-                            </div>
-                        </div>
-                        <div class="warning-sign">
-                            <div class="sign-icon">
-                                <i class="fas fa-tint"></i>
-                            </div>
-                            <div class="sign-content">
-                                <h4>Wet Tail (Diarrhea)</h4>
-                                <p>Serious condition in hamsters. Requires immediate veterinary care.</p>
-                            </div>
-                        </div>
-                        <div class="warning-sign">
-                            <div class="sign-icon">
-                                <i class="fas fa-wind"></i>
-                            </div>
-                            <div class="sign-content">
-                                <h4>Respiratory Issues</h4>
-                                <p>Sneezing, wheezing, nasal discharge. Common in many small pets.</p>
-                            </div>
-                        </div>
+                    
+                    <div class="resource-card">
+                        <h4>Chinchilla Care</h4>
+                        <p>Specialized care for chinchillas including dust baths and temperature requirements.</p>
+                        <a href="https://chinchillacare.org/cage-habitat/" target="_blank" class="resource-link">
+                            Visit Resource <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
-                </section>
-
-                <!-- CTA Section -->
-                <section class="cta-section">
-                    <div class="cta-card">
-                        <h3>Personalized Small Animal Consultation</h3>
-                        <p>Our experts can help you choose the right small pet and provide species-specific care guidance.</p>
-                        <a href="consultation.html" class="btn btn-primary">Book Small Pet Consultation</a>
+                    
+                    <div class="resource-card">
+                        <h4>Gerbil Care</h4>
+                        <p>Creating the perfect habitat for active, burrowing gerbils.</p>
+                        <a href="https://petgerbils.org/cage-habitat/" target="_blank" class="resource-link">
+                            Visit Resource <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
-                </section>
-            </div>
-
-            <!-- Right Column - Sidebar -->
-            <div class="page-sidebar">
-                <!-- Quick Tips -->
-                <div class="sidebar-widget">
-                    <h4><i class="fas fa-lightbulb"></i> Essential Tips</h4>
-                    <ul class="tip-list">
-                        <li>Research species thoroughly before adopting</li>
-                        <li>Purchase from reputable breeders or adopt</li>
-                        <li>Find an exotic vet BEFORE you need one</li>
-                        <li>Handle gently and frequently for socialization</li>
-                        <li>Provide daily supervised out-of-cage time</li>
-                        <li>Never house incompatible species together</li>
-                    </ul>
                 </div>
+            </section>
 
-                <!-- Species-Specific Needs -->
-                <div class="sidebar-widget">
-                    <h4><i class="fas fa-star"></i> Species Highlights</h4>
-                    <div class="sidebar-image">
-                        <img src="assets/images/guinea-pig-care.jpg" alt="Guinea pig care">
-                    </div>
-                    <ul class="tip-list">
-                        <li><strong>Guinea Pigs:</strong> Need vitamin C daily, companionship</li>
-                        <li><strong>Rabbits:</strong> Require spay/neuter, litter training possible</li>
-                        <li><strong>Hamsters:</strong> Nocturnal, need large enclosures</li>
-                        <li><strong>Ferrets:</strong> Need vaccination, frequent playtime</li>
-                        <li><strong>Rats:</strong> Highly intelligent, need mental stimulation</li>
-                    </ul>
-                </div>
-
-                <!-- Safe Foods -->
-                <div class="sidebar-widget">
-                    <h4><i class="fas fa-apple-alt"></i> Safe Treats</h4>
-                    <ul class="tip-list">
-                        <li><strong>Herbivores:</strong> Carrot tops, bell peppers, cilantro</li>
-                        <li><strong>Omnivores:</strong> Cooked egg, mealworms, berries</li>
-                        <li><strong>All:</strong> Small amounts of fruits as occasional treats</li>
-                        <li><strong>Avoid:</strong> Iceberg lettuce, avocado, chocolate</li>
-                    </ul>
-                </div>
-
-                <!-- Download Resource -->
-                <div class="download-card">
-                    <h4><i class="fas fa-download"></i> Care Checklist</h4>
-                    <p>Download our comprehensive small animal care checklist and shopping list</p>
-                    <a href="#" class="btn btn-secondary">Download Care Guide</a>
-                </div>
-            </div>
+            <!-- Consultation CTA -->
+            <section class="content-section cta-card">
+                <h3>Need Help Choosing the Right Small Pet?</h3>
+                <p>Our Pexperts can help you decide which small animal is right for your lifestyle, space, and experience level. We'll provide guidance on setup, care, and creating a happy home for your new companion.</p>
+                <a href="consultation.html" class="btn btn-primary">Schedule a Small Animal Consultation</a>
+            </section>
         </div>
+
+        <!-- Sidebar -->
+        <aside class="page-sidebar">
+            <div class="sidebar-widget">
+                <h4>Daily Care Routine</h4>
+                <ul class="tip-list">
+                    <li>Fresh food and water</li>
+                    <li>Spot clean soiled bedding</li>
+                    <li>Social interaction time</li>
+                    <li>Exercise/play time</li>
+                    <li>Health check (eating, behavior)</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h4>Weekly Tasks</h4>
+                <ul class="tip-list">
+                    <li>Full cage cleaning</li>
+                    <li>Bedding replacement</li>
+                    <li>Toy rotation</li>
+                    <li>Weight monitoring</li>
+                    <li>Nail trimming (if needed)</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-widget">
+                <h4>Safe Foods</h4>
+                <ul class="tip-list">
+                    <li>Fresh vegetables (limited)</li>
+                    <li>Species-specific pellets</li>
+                    <li>Timothy hay (herbivores)</li>
+                    <li>Occasional fruit treats</li>
+                    <li>Fresh herbs (basil, parsley)</li>
+                </ul>
+                <p><small>Avoid: iceberg lettuce, avocado, chocolate, onions</small></p>
+            </div>
+            
+            <div class="sidebar-widget">
+                <img src="assets/images/small-animal-sidebar.jpg" alt="Happy guinea pigs in clean habitat" class="sidebar-image">
+                <p class="image-caption">Proper housing and enrichment are essential for small animal health and happiness.</p>
+            </div>
+            
+            <div class="sidebar-widget download-card">
+                <h4>Download Care Checklist</h4>
+                <p>Get our printable small animal care checklist with daily, weekly, and monthly tasks.</p>
+                <a href="#" class="btn btn-secondary btn-small"><i class="fas fa-download"></i> Download PDF</a>
+            </div>
+        </aside>
     </main>
 
     <!-- Footer -->
-    <footer class="main-footer">
+    <footer class="site-footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>Paradigm Pet Professionals</h3>
-                    <p>Evidence-based pet care advice from certified experts.</p>
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/logo-small.png" alt="Paradigm Pet Professionals Logo" width="180">
+                    </div>
+                    <p class="footer-slogan">Evidence-based pet care advice for every pet lover.</p>
                 </div>
-                <div class="footer-column">
-                    <h4>Quick Links</h4>
+                <div class="footer-col">
+                    <h4>Explore</h4>
                     <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="consultation.html">Consultations</a></li>
-                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-col">
                     <h4>Contact</h4>
-                    <p><i class="fas fa-envelope"></i> info@paradigmpp.com</p>
-                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@paradigm.com">info@paradigm.com</a></li>
+                        <li><a href="tel:555123PETs">(555) 123-PETS</a></li>
+                        <li><a href="consultation.html">Contact Form</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Paradigm Pet Professionals. All rights reserved.</p>
+                <p>&copy; <span class="current-year">2026</span> Paradigm Pet Professionals. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
