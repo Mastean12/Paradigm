@@ -1,0 +1,287 @@
+/* 
+Paradigm Pet Professionals - Consultation Page Styles
+*/
+
+/* Consultation Hero */
+.consultation-hero {
+    background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/consultation-hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Consultation Container */
+.consultation-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-xl) 0;
+}
+
+/* Consultation Info */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.info-card {
+    border-left: 4px solid var(--primary-light);
+}
+
+.info-icon {
+    font-size: 2rem;
+    color: var(--primary-light);
+    margin-bottom: var(--space-sm);
+}
+
+.info-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+}
+
+/* Expectation Steps */
+.expectation-section {
+    margin-bottom: var(--space-xl);
+}
+
+.expectation-steps {
+    display: grid;
+    gap: var(--space-lg);
+}
+
+.step {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-light);
+    color: var(--white);
+    border-radius: 50%;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin-bottom: var(--space-xs);
+    color: var(--primary-dark);
+}
+
+/* Consultation Types */
+.type-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.type-card {
+    border: 2px solid var(--secondary-light);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.type-card.featured {
+    border-color: var(--primary-light);
+    transform: scale(1.05);
+}
+
+.featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-light);
+    color: var(--white);
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.type-card h4 {
+    margin-bottom: var(--space-sm);
+    color: var(--primary-dark);
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md);
+}
+
+.duration {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--secondary-dark);
+}
+
+.type-card ul {
+    list-style: none;
+    margin-bottom: var(--space-lg);
+    flex-grow: 1;
+}
+
+.type-card li {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--secondary-light);
+    position: relative;
+    padding-left: var(--space-md);
+}
+
+.type-card li:last-child {
+    border-bottom: none;
+}
+
+.type-card li::before {
+    content: "✓";
+    color: var(--primary-light);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.type-card .btn {
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Consultation Form */
+.consultation-form-container {
+    position: sticky;
+    top: 100px;
+}
+
+.form-wrapper {
+    background: var(--white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.form-wrapper h2 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    border-bottom: none;
+    margin-bottom: var(--space-sm);
+}
+
+.form-intro {
+    color: var(--secondary-dark);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--secondary-light);
+}
+
+/* Age Input */
+.age-input-group {
+    display: flex;
+    align-items: center;
+}
+
+.age-input-group input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+}
+
+.age-unit {
+    padding: 0.75rem 1rem;
+    background-color: var(--light-gray);
+    border: 2px solid var(--secondary-light);
+    border-left: none;
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    color: var(--secondary-dark);
+}
+
+/* Consent Group */
+.consent-group {
+    background-color: var(--light-gray);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-xl);
+}
+
+.consent-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Form Submit */
+.form-submit {
+    text-align: center;
+}
+
+.btn-submit {
+    width: 100%;
+    margin-bottom: var(--space-md);
+}
+
+.btn-submit i {
+    margin-right: var(--space-xs);
+}
+
+/* Contact Alternative */
+.contact-alternative {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+    border-top: 1px solid var(--secondary-light);
+    text-align: center;
+}
+
+.contact-alternative h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.contact-phone {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: var(--space-md) 0;
+}
+
+.contact-phone a {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+.contact-phone a:hover {
+    color: var(--primary-light);
+}
+
+.contact-hours {
+    color: var(--secondary-dark);
+}
+
+/* FAQ Section */
+.consultation-faq {
+    background-color: var(--light-gray);
+    padding: var(--space-xl) 0;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+}
+
+.faq-item h3 {
+    color: var(--primary-dark);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+}

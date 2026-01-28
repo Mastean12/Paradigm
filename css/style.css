@@ -1,0 +1,31 @@
+/* 
+Paradigm Pet Professionals - Main Stylesheet
+Author: [Your Name]
+Date: January 28, 2026
+
+This is the main file that imports all other CSS files.
+*/
+
+/* Import all CSS modules */
+@import url('base.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('home.css');
+@import url('pet-pages.css');
+@import url('consultation.css');
+@import url('resources.css');
+@import url('about.css');
+@import url('faq.css');
+
+/* 
+Note: Each HTML page can use a subset of these imports.
+For example, the home page only needs:
+  @import url('base.css');
+  @import url('layout.css');
+  @import url('components.css');
+  @import url('home.css');
+  
+This reduces unused CSS and improves performance.
+*/
+
+/* Additional global styles that don't fit in other files */

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Frequently Asked Questions about pet care, consultations, services, and working with Paradigm Pet Professionals.">
+    <title>Frequently Asked Questions | Paradigm Pet Professionals</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/faq.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="Paradigm Pet Professionals Logo" width="250">
+                    </a>
+                </div>
+                <nav class="primary-nav" aria-label="Main Navigation">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Pet Care Guides <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="cats.html">Cats</a></li>
+                                <li><a href="dogs.html">Dogs</a></li>
+                                <li><a href="birds.html">Birds</a></li>
+                                <li><a href="#">Fish</a></li>
+                                <li><a href="#">Small Animals</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="consultation.html">Consultation</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="faq.html" class="active">FAQs</a></li>
+                    </ul>
+                </nav>
+                <a href="consultation.html" class="btn btn-primary btn-header">Schedule Now</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero faq-hero">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our services, consultations, and general pet care advice.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Search FAQ -->
+        <section class="faq-search-section">
+            <div class="search-container">
+                <h2><i class="fas fa-search"></i> Search FAQs</h2>
+                <div class="search-box">
+                    <input type="text" id="faqSearch" placeholder="Type your question here...">
+                    <button id="searchButton" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <p class="search-hint">Try searching for "consultation", "payment", "emergency", or specific pet types.</p>
+            </div>
+        </section>
+
+        <!-- FAQ Categories -->
+        <section class="faq-categories">
+            <h2>Browse by Category</h2>
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="consultation">Consultations</button>
+                <button class="category-btn" data-category="general">General Pet Care</button>
+                <button class="category-btn" data-category="services">Services & Pricing</button>
+                <button class="category-btn" data-category="technical">Technical Support</button>
+            </div>
+        </section>
+
+        <!-- FAQ Accordion -->
+        <section class="faq-accordion">
+            <!-- Consultation Questions -->
+            <div class="faq-category-section" id="consultation-section">
+                <h3><i class="fas fa-video"></i> Consultation Questions</h3>
+                
+                <div class="faq-item" data-category="consultation">
+                    <button class="faq-question">
+                        <span>How soon will I hear back after submitting a consultation request?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We respond to all consultation requests within 48 hours during business days (Monday-Friday). If you submit on Friday evening or over the weekend, you'll hear from us by Tuesday at the latest. We'll contact you via your preferred method (email or phone) to schedule your consultation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="consultation">
+                    <button class="faq-question">
+                        <span>What information do I need to provide for a consultation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>To provide the best advice, we need to know:
+                        <ul>
+                            <li>Your name, phone number, email address, and time zone</li>
+                            <li>Your pet's name, type (cat, dog, bird, etc.), and age</li>
+                            <li>The primary concern or question you want to address</li>
+                            <li>Any relevant medical history or previous treatments</li>
+                        </ul>
+                        All fields in our consultation form are required to ensure we can provide comprehensive, personalized advice.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="consultation">
+                    <button class="faq-question">
+                        <span>What if I need to cancel or reschedule my consultation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You can cancel or reschedule up to 24 hours before your appointment without charge. Simply contact us by phone at (555) 123-PETS or email at info@paradigm.com, and we'll help you find a new time. For cancellations with less than 24 hours notice, a $25 rescheduling fee may apply.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="consultation">
+                    <button class="faq-question">
+                        <span>Do you offer in-person consultations or only virtual?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Currently, we only offer virtual consultations via secure video call. This allows us to serve pet owners nationwide and ensures convenience and safety for everyone. Our virtual consultations have proven to be just as effective as in-person visits for most concerns.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="consultation">
+                    <button class="faq-question">
+                        <span>Can I consult about multiple pets in one session?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>For multiple pets, we recommend booking individual consultations for each pet to ensure we can give each one the focused attention they deserve. However, we do offer multi-pet package pricing. Contact us directly at info@paradigm.com for information about consulting for multiple pets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- General Pet Care Questions -->
+            <div class="faq-category-section" id="general-section">
+                <h3><i class="fas fa-paw"></i> General Pet Care Questions</h3>
+                
+                <div class="faq-item" data-category="general">
+                    <button class="faq-question">
+                        <span>How often should I take my pet to the veterinarian?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>This varies by species and age:
+                        <ul>
+                            <li><strong>Puppies/Kittens:</strong> Every 3-4 weeks until 16 weeks old for vaccinations and check-ups</li>
+                            <li><strong>Adult pets (1-7 years):</strong> Annual wellness exams</li>
+                            <li><strong>Senior pets (7+ years):</strong> Every 6 months for comprehensive check-ups</li>
+                            <li><strong>Birds/Exotics:</strong> Annual exams for most species, more frequent for certain conditions</li>
+                        </ul>
+                        Always consult with your veterinarian for a schedule tailored to your pet's specific needs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="general">
+                    <button class="faq-question">
+                        <span>What are the most common signs that my pet needs medical attention?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Seek veterinary care if your pet shows any of these signs:
+                        <ul>
+                            <li>Not eating or drinking for 24+ hours</li>
+                            <li>Difficulty breathing or rapid breathing at rest</li>
+                            <li>Repeated vomiting or diarrhea</li>
+                            <li>Lethargy or inability to stand/walk</li>
+                            <li>Visible pain or discomfort</li>
+                            <li>Sudden changes in behavior or personality</li>
+                            <li>Bleeding from any orifice</li>
+                            <li>Seizures or collapse</li>
+                        </ul>
+                        When in doubt, it's always better to err on the side of caution and consult a veterinarian.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="general">
+                    <button class="faq-question">
+                        <span>How can I tell if my pet is at a healthy weight?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Use these simple checks:
+                        <ul>
+                            <li><strong>Rib Test:</strong> You should be able to feel your pet's ribs easily with light pressure, but they shouldn't be visible</li>
+                            <li><strong>Waist Check:</strong> When viewed from above, your pet should have a visible waist behind the ribs</li>
+                            <li><strong>Abdominal Tuck:</strong> When viewed from the side, the abdomen should tuck up behind the rib cage</li>
+                        </ul>
+                        About 60% of pets in the U.S. are overweight, which can lead to numerous health problems. Our Pexperts can help create a weight management plan during a consultation.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="general">
+                    <button class="faq-question">
+                        <span>What should I do in a pet emergency?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>In an emergency:
+                        <ol>
+                            <li><strong>Stay calm</strong> - Your pet will pick up on your anxiety</li>
+                            <li><strong>Contact your veterinarian or emergency clinic immediately</strong></li>
+                            <li><strong>Keep your pet warm, quiet, and still</strong> to prevent further injury</li>
+                            <li><strong>Do not give human medications</strong> unless specifically instructed by a veterinarian</li>
+                            <li><strong>Transport carefully</strong> - Use a carrier or makeshift stretcher if needed</li>
+                            <li><strong>Call ahead</strong> to let the clinic know you're coming</li>
+                        </ol>
+                        Keep your veterinarian's phone number and the nearest emergency clinic information readily accessible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services & Pricing Questions -->
+            <div class="faq-category-section" id="services-section">
+                <h3><i class="fas fa-dollar-sign"></i> Services & Pricing Questions</h3>
+                
+                <div class="faq-item" data-category="services">
+                    <button class="faq-question">
+                        <span>What payment methods do you accept?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We accept all major credit cards (Visa, Mastercard, American Express, Discover), PayPal, and Apple Pay. Payment is collected when we confirm your consultation time. We do not accept checks or cash for virtual consultations.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="services">
+                    <button class="faq-question">
+                        <span>Do you offer refunds if I'm not satisfied with the consultation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer a satisfaction guarantee. If you're not completely satisfied with your consultation, contact us within 7 days and we'll either provide a follow-up consultation at no charge or issue a full refund. We're committed to ensuring every client receives valuable, actionable advice.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="services">
+                    <button class="faq-question">
+                        <span>Do you accept pet insurance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We don't bill insurance companies directly, but we can provide you with a detailed receipt that includes diagnosis codes and procedure descriptions that you can submit to your pet insurance company for possible reimbursement. Check with your insurance provider about their coverage for behavioral consultations and nutritional counseling.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="services">
+                    <button class="faq-question">
+                        <span>What's included in the New Pet Consultation Package?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The New Pet Consultation Package ($120) includes:
+                        <ul>
+                            <li>90-minute comprehensive consultation</li>
+                            <li>Home environment evaluation checklist</li>
+                            <li>Breed-specific guidance and expectations</li>
+                            <li>Training and socialization timeline</li>
+                            <li>30 days of email support for follow-up questions</li>
+                            <li>Resource packet with printable guides and checklists</li>
+                            <li>Recommendations for local resources (trainers, groomers, etc.)</li>
+                        </ul>
+                        This package is designed to set you and your new pet up for long-term success.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Support Questions -->
+            <div class="faq-category-section" id="technical-section">
+                <h3><i class="fas fa-laptop"></i> Technical Support Questions</h3>
+                
+                <div class="faq-item" data-category="technical">
+                    <button class="faq-question">
+                        <span>What technology do I need for a virtual consultation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You'll need:
+                        <ul>
+                            <li>A computer, tablet, or smartphone with a camera and microphone</li>
+                            <li>A stable internet connection</li>
+                            <li>A quiet, well-lit space where you and your pet can be comfortable</li>
+                            <li>For some consultations, you may want to have treats or toys handy</li>
+                        </ul>
+                        We use a secure, HIPAA-compliant video platform that works in most web browsers. We'll send you a link before your appointment - no software installation required.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="technical">
+                    <button class="faq-question">
+                        <span>What if I have technical difficulties during my consultation?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>If you experience technical issues:
+                        <ol>
+                            <li>Try refreshing your browser</li>
+                            <li>Check your internet connection</li>
+                            <li>Ensure your camera and microphone permissions are enabled</li>
+                            <li>If video isn't working, we can continue by phone while troubleshooting</li>
+                        </ol>
+                        We build extra time into each consultation to account for potential technical issues. If we can't resolve the problem, we'll reschedule your consultation at no charge.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="technical">
+                    <button class="faq-question">
+                        <span>Is my personal information secure on your website?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, we take data security seriously. Our website uses:
+                        <ul>
+                            <li>SSL encryption for all data transmission</li>
+                            <li>Secure, HIPAA-compliant forms for sensitive information</li>
+                            <li>Regular security audits and updates</li>
+                            <li>Strict privacy policies - we never sell or share your information</li>
+                        </ul>
+                        You can review our complete <a href="privacy.html">Privacy Policy</a> for detailed information about how we protect your data.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="technical">
+                    <button class="faq-question">
+                        <span>How do I update my contact information or cancel my account?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>To update your contact information or request account cancellation:
+                        <ul>
+                            <li>Email us at <a href="mailto:support@paradigm.com">support@paradigm.com</a></li>
+                            <li>Include your full name and the email associated with your account</li>
+                            <li>Specify what changes you'd like to make</li>
+                            <li>We'll confirm the changes within 48 hours</li>
+                        </ul>
+                        We're required to keep consultation records for 7 years for professional and legal reasons, but we can update your contact preferences immediately.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Still Have Questions? -->
+        <section class="faq-contact-section">
+            <div class="contact-card">
+                <h3><i class="fas fa-question-circle"></i> Still Have Questions?</h3>
+                <p>Can't find the answer you're looking for? Our team is here to help.</p>
+                
+                <div class="contact-options">
+                    <div class="contact-option">
+                        <div class="option-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Email Us</h4>
+                            <p>Send your question to <a href="mailto:info@paradigm.com">info@paradigm.com</a></p>
+                            <p class="option-note">Response within 48 hours</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-option">
+                        <div class="option-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Call Us</h4>
+                            <p><a href="tel:555123PETs">(555) 123-PETS</a></p>
+                            <p class="option-note">Mon-Fri, 9am-6pm ET</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-option">
+                        <div class="option-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="option-content">
+                            <h4>Schedule a Consultation</h4>
+                            <p>Get personalized answers during a one-on-one session</p>
+                            <a href="consultation.html" class="btn btn-secondary btn-small">Schedule Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/logo-small.png" alt="Paradigm Pet Professionals Logo" width="180">
+                    </div>
+                    <p class="footer-slogan">Evidence-based pet care advice for every pet lover.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul class="footer-links">
+                        <li><a href="sitemap.html">Sitemap</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@paradigm.com">info@paradigm.com</a></li>
+                        <li><a href="tel:555123PETs">(555) 123-PETS</a></li>
+                        <li><a href="consultation.html">Contact Form</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span class="current-year">2026</span> Paradigm Pet Professionals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // FAQ-specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Accordion functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle current answer
+                    answer.classList.toggle('active');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                    
+                    // Close other answers (optional - remove if you want multiple open)
+                    // faqQuestions.forEach(otherQuestion => {
+                    //     if (otherQuestion !== this) {
+                    //         otherQuestion.nextElementSibling.classList.remove('active');
+                    //         otherQuestion.querySelector('i').classList.add('fa-chevron-down');
+                    //         otherQuestion.querySelector('i').classList.remove('fa-chevron-up');
+                    //     }
+                    // });
+                });
+            });
+            
+            // FAQ Category filtering
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter FAQ items
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // FAQ Search functionality
+            const searchInput = document.getElementById('faqSearch');
+            const searchButton = document.getElementById('searchButton');
+            
+            function searchFAQs() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    // Show all if search is empty
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    document.querySelector('[data-category="all"]').classList.add('active');
+                    return;
+                }
+                
+                let foundCount = 0;
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question span').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        foundCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Update category buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Show message if no results
+                const existingMessage = document.querySelector('.search-results-message');
+                if (existingMessage) {
+                    existingMessage.remove();
+                }
+                
+                if (foundCount === 0) {
+                    const message = document.createElement('div');
+                    message.className = 'search-results-message';
+                    message.innerHTML = `<p>No results found for "${searchTerm}". Try different keywords or <a href="#faq-contact-section">contact us</a> directly.</p>`;
+                    searchInput.parentNode.parentNode.appendChild(message);
+                }
+            }
+            
+            searchButton.addEventListener('click', searchFAQs);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    searchFAQs();
+                }
+            });
+            
+            // Open FAQ based on URL hash
+            if (window.location.hash) {
+                const targetId = window.location.hash.substring(1);
+                const targetQuestion = document.querySelector(`[data-id="${targetId}"]`);
+                
+                if (targetQuestion) {
+                    targetQuestion.querySelector('.faq-question').click();
+                    setTimeout(() => {
+                        targetQuestion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 300);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

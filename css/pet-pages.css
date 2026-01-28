@@ -1,0 +1,378 @@
+/* 
+Paradigm Pet Professionals - Pet Pages Styles (Cats, Dogs, Birds, Fish, Small Animals)
+*/
+
+/* Specific hero backgrounds */
+.cat-hero {
+    background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/cat-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.dog-hero {
+    background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/dog-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.bird-hero {
+    background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/bird-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.fish-hero {
+    background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/fish-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.small-animals-hero {
+    background: linear-gradient(rgba(0, 59, 109, 0.9), rgba(0, 59, 109, 0.9)), url('../assets/images/small-animals-hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* ===== PAGE LAYOUT (Inner Pages) ===== */
+.page-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-xl) 0;
+}
+
+/* Pet Introduction Image */
+.pet-intro-image {
+    width: 100%;
+    max-height: 400px;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    margin: var(--space-lg) 0;
+}
+
+.pet-intro-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+/* Content Sections */
+.content-section {
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--secondary-light);
+}
+
+.content-section:last-child {
+    border-bottom: none;
+}
+
+.content-section h3 {
+    color: var(--primary-light);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* For images within content */
+.content-image {
+    width: 100%;
+    margin: var(--space-lg) 0;
+}
+
+.content-image img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    color: var(--secondary-dark);
+    font-style: italic;
+    text-align: center;
+    margin-top: var(--space-xs);
+}
+
+/* Age Stages (Cats Page) */
+.age-stage {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--secondary-light);
+}
+
+.age-stage:last-child {
+    border-bottom: none;
+}
+
+.age-stage h3 {
+    color: var(--primary-light);
+    margin-bottom: var(--space-sm);
+}
+
+/* Info Cards */
+.info-card {
+    background-color: var(--light-gray);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+    border-left: 4px solid var(--primary-light);
+}
+
+.info-card h4 {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md);
+}
+
+/* Comparison Table */
+.comparison-table {
+    overflow-x: auto;
+    margin: var(--space-lg) 0;
+}
+
+.comparison-table table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.comparison-table th {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    padding: var(--space-md);
+    text-align: left;
+    font-weight: 600;
+}
+
+.comparison-table td {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--secondary-light);
+}
+
+.comparison-table tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+.comparison-table tr:hover {
+    background-color: rgba(0, 59, 109, 0.05);
+}
+
+/* Diet Grid */
+.diet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-lg) 0;
+}
+
+.diet-card {
+    background-color: var(--white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--primary-light);
+}
+
+.diet-card h4 {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* Warning Signs (Birds, Fish, Small Animals Pages) */
+.warning-signs {
+    display: grid;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.warning-sign {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    background-color: var(--light-gray);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--warning);
+}
+
+.sign-icon {
+    font-size: 1.5rem;
+    color: var(--warning);
+    flex-shrink: 0;
+}
+
+.sign-content h4 {
+    margin-bottom: var(--space-xs);
+}
+
+.important-note {
+    background-color: rgba(255, 152, 0, 0.1);
+    border-left: 4px solid var(--warning);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin: var(--space-lg) 0;
+}
+
+/* CTA Section */
+.cta-section {
+    margin-top: var(--space-xl);
+}
+
+.cta-card {
+    background-color: var(--light-gray);
+    padding: var(--space-xl);
+    border-radius: var(--radius-md);
+    text-align: center;
+    border-left: 4px solid var(--primary-light);
+}
+
+.cta-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md);
+}
+
+.cta-card p {
+    color: var(--secondary-dark);
+    max-width: 600px;
+    margin: 0 auto var(--space-md);
+}
+
+.cta-card .btn {
+    margin-top: var(--space-md);
+}
+
+/* ===== SIDEBAR ===== */
+.page-sidebar {
+    margin-top: var(--space-lg);
+}
+
+.sidebar-widget {
+    background-color: var(--white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--space-lg);
+}
+
+.sidebar-widget h4 {
+    color: var(--primary-dark);
+    margin-bottom: var(--space-md);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: var(--space-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.tip-list {
+    list-style: none;
+}
+
+.tip-list li {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--secondary-light);
+    position: relative;
+    padding-left: var(--space-md);
+}
+
+.tip-list li:last-child {
+    border-bottom: none;
+}
+
+.tip-list li::before {
+    content: "•";
+    color: var(--primary-light);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.sidebar-image {
+    width: 100%;
+    margin-bottom: var(--space-md);
+}
+
+.sidebar-image img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+}
+
+.download-card {
+    background-color: var(--primary-dark);
+    color: var(--white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    text-align: center;
+}
+
+.download-card h4 {
+    color: var(--white);
+    border-bottom: none;
+}
+
+.download-card p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-md);
+}
+
+.download-card .btn {
+    margin-top: var(--space-sm);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .page-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .diet-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pet-intro-image {
+        max-height: 300px;
+    }
+    
+    .content-image img {
+        max-height: 250px;
+    }
+    
+    .sidebar-image img {
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+    .warning-sign {
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .pet-intro-image {
+        max-height: 200px;
+    }
+    
+    .content-image img {
+        max-height: 200px;
+    }
+    
+    .cta-card {
+        padding: var(--space-lg);
+    }
+    
+    .sidebar-widget,
+    .download-card {
+        padding: var(--space-md);
+    }
+}

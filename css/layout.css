@@ -1,0 +1,252 @@
+/* 
+Paradigm Pet Professionals - Layout Styles
+*/
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+    h1 {
+        font-size: 2.25rem;
+    }
+    
+    h2 {
+        font-size: 1.75rem;
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .guides-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .page-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Responsive for new pages */
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .credentials-grid,
+    .team-grid,
+    .testimonials-grid,
+    .contact-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .preparation-grid,
+    .consultation-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .type-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile (up to 768px) */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 var(--space-sm);
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Header & Navigation Mobile */
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .primary-nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-md);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all var(--transition-normal);
+    }
+    
+    .primary-nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .primary-nav .nav-list {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .primary-nav a {
+        display: block;
+        padding: var(--space-sm);
+        border-bottom: 1px solid var(--secondary-light);
+    }
+    
+    .primary-nav a:last-child {
+        border-bottom: none;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding: var(--space-sm) 0 0 var(--space-md);
+        background-color: transparent;
+    }
+    
+    .btn-header {
+        display: none;
+    }
+    
+    /* Grid Layouts Mobile */
+    .services-grid,
+    .guides-grid,
+    .trust-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+    }
+    
+    .form-group {
+        flex-direction: column;
+    }
+    
+    /* Mobile for new pages */
+    .info-grid,
+    .resource-cards,
+    .credentials-grid,
+    .team-grid,
+    .testimonials-grid,
+    .contact-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row,
+    .type-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .category-btn {
+        text-align: center;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    /* Footer Mobile */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+    }
+    
+    /* Padding Adjustments */
+    .hero,
+    .services,
+    .featured-guides,
+    .cta-section,
+    .trust-section,
+    .page-hero {
+        padding: var(--space-lg) 0;
+    }
+    
+    /* Adjustments for new pages */
+    .faq-search-section,
+    .contact-card,
+    .form-wrapper {
+        padding: var(--space-lg);
+    }
+    
+    .step {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .step-number {
+        margin-bottom: var(--space-xs);
+    }
+    
+    .contact-option {
+        text-align: center;
+    }
+}
+
+/* Small Mobile (up to 480px) */
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn-large {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .service-card,
+    .guide-card,
+    .sidebar-widget {
+        padding: var(--space-md);
+    }
+    
+    /* Small mobile for new pages */
+    .form-wrapper {
+        padding: var(--space-md);
+    }
+    
+    .future-features {
+        flex-direction: column;
+        align-items: center;
+    }
+}
